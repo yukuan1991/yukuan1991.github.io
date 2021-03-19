@@ -229,6 +229,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/Swiper的常见用法及场景/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/10/Swiper的常见用法及场景/" itemprop="url">轻松搞定Swiper轮播</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-10T10:14:57+08:00">
+                2020-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/09/10/Swiper的常见用法及场景/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/09/10/Swiper的常见用法及场景/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><code>Swiper</code>(Swiper master)是目前应用较广泛的移动端网页触摸内容滑动js插件，简单配置即可实现手机、电脑网页大部分滑动功能，焦点图、tab、触摸导航等。</p>
+<p>大屏开发中也经常用到例如轮播图片、信息列表等。相比于<code>scrollbox</code>，<code>swiper</code>支持手动拖拽、点击切换，用户体验更佳。</p>
+<h2 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h2><p>首先对应的引入<code>swiper</code>的<code>js</code>、<code>css</code>资源，根据对应的需求编写<code>dom</code>、<code>css</code>样式，最后<code>js</code>简单配置一下，就完成了一个简单的轮播功能。</p>
+<p><code>HTML</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;swiper-container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;swiper-wrapper&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;swiper-slide&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;swiper-slide&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;swiper-slide&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/swiper-container&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>JS</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var swiperObj = new Swiper(&apos;.swiper-container&apos;, &#123;</span><br><span class="line">    direction: &apos;vertical&apos;, // Swiper的滑动方向,默认为horizontal（水平方向）</span><br><span class="line">    slidesPerView: &apos;auto&apos;, // 设置slider容器能够同时显示的slides数量</span><br><span class="line">    autoplay: &#123;</span><br><span class="line">        delay: 3000, // 轮播时间</span><br><span class="line">        disableOnInteraction: false // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="实际项目分享"><a href="#实际项目分享" class="headerlink" title="实际项目分享"></a>实际项目分享</h2><p>简单的轮播相信大家都会，下面就跟大家分享一下我实际项目中做过的<code>swiper</code>实例吧。</p>
+<h3 id="swiper切换效果一-嵌套"><a href="#swiper切换效果一-嵌套" class="headerlink" title="swiper切换效果一+嵌套"></a>swiper切换效果一+嵌套</h3><p><img src="/2020/09/10/Swiper的常见用法及场景/swiper1.gif" alt="swiper1.gif"></p>
+<p>最外层的<code>swiper</code>使用了切换效果的配置，配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 初始化top10类别swiper</span><br><span class="line">    var categorySwiper = new Swiper(&apos;.category-swiper-container&apos;, &#123;</span><br><span class="line">        slidesPerView: &apos;auto&apos;,</span><br><span class="line">        autoplay: &#123;</span><br><span class="line">            delay: 10000,</span><br><span class="line">            disableOnInteraction: false,</span><br><span class="line">        &#125;,</span><br><span class="line">        centeredSlides: true, // 设定为true时，active slide会居中，而不是默认状态下的居左。</span><br><span class="line">        slideToClickedSlide: true, // 设置为true则点击slide会过渡到这个slide。</span><br><span class="line">        /* 切换效果 */</span><br><span class="line">        effect: &apos;coverflow&apos;, // cover flow是类似于苹果将多首歌曲的封面以3D界面的形式显示出来的方式。</span><br><span class="line">        coverflowEffect: &#123;</span><br><span class="line">            rotate: -45, // slide做3d旋转时Y轴的旋转角度</span><br><span class="line">            stretch: 40, // 每个slide之间的拉伸值，越大slide靠得越紧</span><br><span class="line">            depth: 800, // slide的位置深度。值越大z轴距离越远，看起来越小</span><br><span class="line">            modifier: 1, // depth和rotate和stretch的倍率</span><br><span class="line">            slideShadows: true // 是否开启slide阴影</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>top10列表配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 初始化top10列表swiper</span><br><span class="line">    var top10Swiper = new Swiper(&apos;.top10-swiper&apos; + i, &#123;</span><br><span class="line">        direction: &apos;vertical&apos;,</span><br><span class="line">        slidesPerView: &apos;auto&apos;,</span><br><span class="line">        slideToClickedSlide: true,</span><br><span class="line">        centeredSlides: true,</span><br><span class="line">        loop: true, // 设置为true 则开启loop模式。</span><br><span class="line">        effect: &apos;coverflow&apos;,</span><br><span class="line">        coverflowEffect: &#123;</span><br><span class="line">            rotate: 0,</span><br><span class="line">            stretch: -30,</span><br><span class="line">            depth: 100,</span><br><span class="line">            modifier: 1,</span><br><span class="line">            slideShadows: false</span><br><span class="line">        &#125;,</span><br><span class="line">        on: &#123;</span><br><span class="line">            // 回调函数，过渡结束时触发，监听列表项变化，联动模块刷新</span><br><span class="line">            transitionEnd: function () &#123;</span><br><span class="line">                var idx = this.realIndex;</span><br><span class="line">                renderDetail(datas[i][idx].detail, i);</span><br><span class="line">                $(&apos;.total-number&gt;span&apos;).text(datas[i][idx].total);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>列表详情配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 列表详情</span><br><span class="line">detailSwiperArr[index] = new Swiper(&apos;.detail-swiper&apos; + index, &#123;</span><br><span class="line">    slideToClickedSlide: true,</span><br><span class="line">    nested: true, // 关键属性：用于嵌套相同方向的swiper时，当切换到子swiper时停止父swiper的切换。</span><br><span class="line">    // 分页配置</span><br><span class="line">    pagination: &#123;</span><br><span class="line">        el: &apos;.detail-pagination&apos; + index,</span><br><span class="line">        clickable: true // 是否可点击</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="swiper切换效果二"><a href="#swiper切换效果二" class="headerlink" title="swiper切换效果二"></a>swiper切换效果二</h3><p><img src="/2020/09/10/Swiper的常见用法及场景/swiper2.gif" alt="swiper2.gif"></p>
+<p>这个效果主要是中间要展示两个对应的滑块，我这边的方案就是把每个对应的<code>slide</code>里都放入 2 个对应的模块，然后通过<code>swiper-container</code>容器宽度超出时，将对应左右两边的 1 个模块通过<code>overflow:hidden</code>隐藏。</p>
+<p><code>html</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// dom</span><br><span class="line">&lt;div class=&quot;swiper-container&quot; id=&quot;punishment-ct&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;swiper-wrapper&quot; id=&quot;punishment-bd&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 模板</span><br><span class="line">&lt;!-- 行政处罚情况 --&gt;</span><br><span class="line">&lt;script type=&quot;text/html&quot; id=&quot;punishment-tpl&quot;&gt;</span><br><span class="line">    &#123;&#123;#.&#125;&#125;</span><br><span class="line">      // 对应模板内容</span><br><span class="line">    &#123;&#123;/.&#125;&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><code>js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// 渲染轮播列表(工具方法)</span><br><span class="line">function renderList(data, swiperobj, options) &#123;</span><br><span class="line">    // 生成序号</span><br><span class="line">	$.each(data, function (i, e) &#123;</span><br><span class="line">		e.order = i + 1;</span><br><span class="line">	&#125;);</span><br><span class="line">    // 销毁</span><br><span class="line">	swiperobj &amp;&amp; swiperobj.destroy();</span><br><span class="line">	swiperobj = null;</span><br><span class="line">    // 生成dom</span><br><span class="line">	Util.renderer((options.tpl || options.key) + &apos;-tpl&apos;, data).to(options.key + &apos;-bd&apos;);</span><br><span class="line">    // 默认配置</span><br><span class="line">	var defaultOpt = &#123;</span><br><span class="line">		direction: &apos;vertical&apos;,</span><br><span class="line">		slidesPerView: 5,</span><br><span class="line">		autoplay: &#123;</span><br><span class="line">			delay: 3000,</span><br><span class="line">			disableOnInteraction: false</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	swiperobj = new Swiper(&apos;#&apos; + options.key + &apos;-ct&apos;, Object.assign(defaultOpt, options));</span><br><span class="line">	return swiperobj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 行政处罚情况</span><br><span class="line">function getPenalties(data) &#123;</span><br><span class="line">    // 处理数据格式 一维数组 =&gt; 二维数组</span><br><span class="line">    // [&#123;name: &apos;xx&apos;&#125;,&#123;name: &apos;xx&apos;&#125;,...] =&gt; [[&#123;name: &apos;xx&apos;&#125;,&#123;name: &apos;xx&apos;&#125;], []...]</span><br><span class="line">	var datas = Util.splitArr(data, 2);</span><br><span class="line">	punishmentSwiper = renderList(datas, punishmentSwiper, &#123;</span><br><span class="line">		key: &apos;punishment&apos;, // 关键词,对应dom id前缀</span><br><span class="line">        // tpl: &apos;&apos;, // 模板对应关键词，当多个swiper共用一个模板时需要设置，默认使用key的值</span><br><span class="line">        /* 自定义配置项与默认配置混合 */</span><br><span class="line">		direction: &apos;horizontal&apos;,</span><br><span class="line">		loop: true,</span><br><span class="line">		effect: &apos;coverflow&apos;,</span><br><span class="line">		slidesPerView: &apos;auto&apos;,</span><br><span class="line">		coverflowEffect: &#123;</span><br><span class="line">			rotate: 0,</span><br><span class="line">			stretch: 0,</span><br><span class="line">			depth: 500,</span><br><span class="line">			slideShadows: false</span><br><span class="line">		&#125;,</span><br><span class="line">		centeredSlides: true</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="swiper缩放"><a href="#swiper缩放" class="headerlink" title="swiper缩放"></a>swiper缩放</h3><p><img src="/2020/09/10/Swiper的常见用法及场景/swiper3.gif" alt="swiper3.gif"></p>
+<p>该效果主要通过每个<code>slide</code>对应的progress值，去动态计算出一个基值，从而产生不同的偏移距离、缩放比例等。</p>
+<p><code>js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">var swiper = new Swiper(&apos;.swiper-container&apos;, &#123;</span><br><span class="line">    watchSlidesProgress: true, // 开启这个参数来计算每个slide的progress，Swiper的progress无需设置即开启。</span><br><span class="line">    slidesPerView: &apos;auto&apos;,</span><br><span class="line">    centeredSlides: true,</span><br><span class="line">    loop: true,</span><br><span class="line">    autoplay: &#123;</span><br><span class="line">        disableOnInteraction: false</span><br><span class="line">    &#125;,</span><br><span class="line">    on: &#123;</span><br><span class="line">        progress: function () &#123;</span><br><span class="line">            for (var i = 0; i &lt; this.slides.length; i++) &#123;</span><br><span class="line">                var slide = this.slides.eq(i);</span><br><span class="line">                var slideProgress = this.slides[i].progress; // 每个slide的progress</span><br><span class="line">                var modify = 1; // 默认基数</span><br><span class="line">                if (Math.abs(slideProgress) &gt; 1) &#123;</span><br><span class="line">                    modify = (Math.abs(slideProgress) - 1) * 0.3 + 1; // 动态计算基数</span><br><span class="line">                &#125;</span><br><span class="line">                var translate = slideProgress * modify * 530 + &apos;px&apos;; // 偏移距离</span><br><span class="line">                var scale = 1 - Math.abs(slideProgress) / 3; // 缩放比例</span><br><span class="line">                var zIndex = 999 - Math.abs(Math.round(10 * slideProgress)); // z值</span><br><span class="line">                slide.transform(&apos;translateX(&apos; + translate + &apos;) scale(&apos; + scale + &apos;)&apos;);</span><br><span class="line">                slide.css(&apos;zIndex&apos;, zIndex);</span><br><span class="line">                slide.css(&apos;opacity&apos;, 1);</span><br><span class="line">                // 隐藏其它slide</span><br><span class="line">                if (Math.abs(slideProgress) &gt; 3) &#123;</span><br><span class="line">                    slide.css(&apos;opacity&apos;, 0);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        // 设置对应slide的偏移距离</span><br><span class="line">        setTransition: function (transition) &#123;</span><br><span class="line">            for (var i = 0; i &lt; this.slides.length; i++) &#123;</span><br><span class="line">                var slide = this.slides.eq(i);</span><br><span class="line">                slide.transition(transition);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="swiper-transition效果一"><a href="#swiper-transition效果一" class="headerlink" title="swiper transition效果一"></a>swiper transition效果一</h3><p><img src="/2020/09/10/Swiper的常见用法及场景/swiper4.gif" alt="swiper4.gif"></p>
+<p>该效果主要难点在于<code>slide</code>的激活状态与常态的宽高不一致，而<code>swiper</code>每次滑动距离都是固定的。主要的解决思路就是<code>swiper</code>每次滑动是通过改变<code>swiper-wrapper</code>的<code>translate</code>属性，那么我们可以通过<code>js</code>在每次切换时，给它固定好移动的距离，就可以了，还有一个需要注意的点就是<code>slide</code>的大小会平均分配，在<code>css</code>中需要将对应的状态的<code>slide</code>设置固定宽高。</p>
+<p><code>JS</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var mySwiper = new Swiper(&apos;.swiper-container&apos;, &#123;</span><br><span class="line">    slidesPerView: 5,</span><br><span class="line">    centeredSlides: true,</span><br><span class="line">    spaceBetween: 100, // 间隔</span><br><span class="line">    slideToClickedSlide: true,</span><br><span class="line">    autoplay: &#123;</span><br><span class="line">        delay: 3000,</span><br><span class="line">        disableOnInteraction: false</span><br><span class="line">    &#125;,</span><br><span class="line">    on: &#123;</span><br><span class="line">        // 关键步骤 过渡开始前，设置对应的translate</span><br><span class="line">        transitionStart: function () &#123;</span><br><span class="line">            var _this = this;</span><br><span class="line">            // 返回第一个</span><br><span class="line">            if (this.isEnd) &#123;</span><br><span class="line">                setTimeout(function () &#123;</span><br><span class="line">                    _this.slideTo(0);</span><br><span class="line">                &#125;, 3000);</span><br><span class="line">            &#125;</span><br><span class="line">            var translate = 3810 - this.realIndex * 1905; // 3810为初始位置的偏移, 1905为单个轮播的偏移</span><br><span class="line">            this.setTranslate(translate);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="swiper-transition效果二"><a href="#swiper-transition效果二" class="headerlink" title="swiper transition效果二"></a>swiper transition效果二</h3><p><img src="/2020/09/10/Swiper的常见用法及场景/swiper5.gif" alt="swiper5.gif"></p>
+<p>这个其实和上一个例子配置上差别不大，区别就是起始位置一个在中间，一个则是在顶部。这个里面并没有使用<code>autoplay</code>，因为当<code>swiper</code>能把最后的<code>slide</code>展示出来的时候，它并不会继续轮播下去直至最后一个<code>slide</code>高亮，而会直接从头开始。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var reportSwiper = new Swiper(&apos;#report-container&apos;, &#123;</span><br><span class="line">    direction: &apos;vertical&apos;,</span><br><span class="line">    slidesPerView: &apos;auto&apos;,</span><br><span class="line">    spaceBetween: 10,</span><br><span class="line">    centeredSlides: true,</span><br><span class="line">    slideToClickedSlide: true,</span><br><span class="line">    on: &#123;</span><br><span class="line">      transitionStart: function () &#123;</span><br><span class="line">        clearTimeout(reportTimer);</span><br><span class="line">        var _this = this;</span><br><span class="line">        var next;</span><br><span class="line">        if (this.isEnd) &#123;</span><br><span class="line">          next = 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          next = this.realIndex + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        reportTimer = setTimeout(function () &#123;</span><br><span class="line">          _this.slideTo(next);</span><br><span class="line">        &#125;, 3000);</span><br><span class="line">        var translate = -this.realIndex * 52;</span><br><span class="line">        this.setTranslate(translate);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="swiper-rem方案"><a href="#swiper-rem方案" class="headerlink" title="swiper rem方案"></a>swiper rem方案</h3><p><img src="/2020/09/10/Swiper的常见用法及场景/swiper6.gif" alt="swiper6.gif"></p>
+<p>之前做自适应页面的时候，估计大家也都碰到过页面手动缩放时<code>swiper</code>样式错乱的问题，解决方案就是监听它的<code>resize</code>事件，然后调用<code>update</code>方法去更新。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">areaSwiper = renderSwiper(data, areaSwiper, &#123;</span><br><span class="line">    key: &apos;area&apos;,</span><br><span class="line">    effect: &apos;coverflow&apos;,</span><br><span class="line">    centeredSlides: true,</span><br><span class="line">    loop: true,</span><br><span class="line">    coverflowEffect: &#123;</span><br><span class="line">        rotate: -30,</span><br><span class="line">        stretch: -20,</span><br><span class="line">        depth: 100,</span><br><span class="line">        modifier: 1,</span><br><span class="line">        slideShadows: false</span><br><span class="line">    &#125;,</span><br><span class="line">    on: &#123;</span><br><span class="line">        // 关键步骤监听resize事件，更新swiper</span><br><span class="line">        resize: function () &#123;</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                areaSwiper.update();</span><br><span class="line">            &#125;, 100);   //延时器很重要，不加可能会出错</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上就是我对于<code>swiper</code>的一些理解与运用，希望能对大家有所帮助。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/Vuex/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2321,274 +2515,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sponge">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sponge的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/" itemprop="url">前端知识归纳（5）-- JS进阶（part4 canvas进阶）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T15:56:29+08:00">
-                2019-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3.4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  13
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="键盘事件处理"><a href="#键盘事件处理" class="headerlink" title="键盘事件处理"></a>键盘事件处理</h1><p>在制作 PC 端的游戏的时候，我们经常需要监听键盘的事件，以便响应用户的键盘操作。目前，对键盘事件的支持主要遵循的是 <code>DOM0级</code>。</p>
-<h2 id="按键相关事件"><a href="#按键相关事件" class="headerlink" title="按键相关事件"></a>按键相关事件</h2><p>键盘操作涉及下面三种事件：</p>
-<ul>
-<li><strong>keydown</strong>：当用户按下键盘上的任意键时触发，而且如果按住按住不放的话，会重复触发此事件。</li>
-<li><strong>keypress</strong>：当用户按下键盘上的字符键时触发，而且如果按住不放的，会重复触发此事件（按下Esc键也会触发这个事件）。</li>
-<li><strong>keyup</strong>：当用户释放键盘上的键时触发。</li>
-</ul>
-<h2 id="按键过程"><a href="#按键过程" class="headerlink" title="按键过程"></a>按键过程</h2><p>用户按下键盘上的字符键时</p>
-<ul>
-<li>首先会触发 <code>keydown</code> 事件</li>
-<li>然后紧接着触发 <code>keypress</code> 事件</li>
-<li>最后触发 <code>keyup</code>事件<br>如果用户按下了一个字符键不放，就会重复触发 <code>keydown</code> 和 <code>keypress</code> 事件，直到用户松开该键为止。</li>
-</ul>
-<h2 id="键码（keyCode）对照表"><a href="#键码（keyCode）对照表" class="headerlink" title="键码（keyCode）对照表"></a>键码（keyCode）对照表</h2><p>在发送 <code>keydown</code> 和 <code>keyup</code> 事件时，<code>event</code> 对象的 <code>keyCode</code> 属性中会包含一个代码，与键盘上一个特定的键对应。如下图，为我们键盘键位的 keyCode 对照表：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/keycode.png" alt="keycode.png"></p>
-<h2 id="例子：简单实现键盘控制物体移动"><a href="#例子：简单实现键盘控制物体移动" class="headerlink" title="例子：简单实现键盘控制物体移动"></a>例子：简单实现键盘控制物体移动</h2><p>实现的基本原理如下：监听全局键盘操作事件，当用户按下某一按键时，返回对应的键值，然后再根据键值判断用户按下了哪一按键，来控制物体上下移动的操作，效果如下：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/keyboard.gif" alt="keyboard.gif"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;物体移动&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas id=&quot;canvas&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">      var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">      var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">      var rect = &#123;</span><br><span class="line">        x: 100, // 矩形的 x 坐标</span><br><span class="line">        y: 400, // 矩形的 y 坐标</span><br><span class="line">        width: 100, // 矩形的宽度</span><br><span class="line">        height: 100, // 矩形的高度</span><br><span class="line">        step: 30 // 矩形移动的步伐</span><br><span class="line">      &#125;</span><br><span class="line">      // 全局监听键盘操作的 keydown 事件 </span><br><span class="line">      document.onkeydown = function(e) &#123;  </span><br><span class="line">        // 获取被按下的键值 (兼容写法)</span><br><span class="line">        var key = e.keyCode || e.which || e.charCode;</span><br><span class="line">        switch(key) &#123;</span><br><span class="line">          // 点击左方向键</span><br><span class="line">          case 37: </span><br><span class="line">            rect.x -= 20;</span><br><span class="line">            drawRect();</span><br><span class="line">            break;</span><br><span class="line">          // 点击上方向键</span><br><span class="line">          case 38: </span><br><span class="line">            rect.y -= 20;</span><br><span class="line">            drawRect();</span><br><span class="line">            break;</span><br><span class="line">          // 点击右方向键</span><br><span class="line">          case 39: </span><br><span class="line">            rect.x += 20;</span><br><span class="line">            drawRect();</span><br><span class="line">            break;</span><br><span class="line">          // 点击下方向键</span><br><span class="line">          case 40: </span><br><span class="line">            rect.y += 20;</span><br><span class="line">            drawRect();</span><br><span class="line">            break;</span><br><span class="line">        &#125; </span><br><span class="line">      &#125;;</span><br><span class="line">      function drawRect() &#123;</span><br><span class="line">        // 清除画布</span><br><span class="line">        context.clearRect(0, 0, canvas.width, canvas.height);</span><br><span class="line">        // 绘制矩形</span><br><span class="line">        context.fillRect(rect.x, rect.y, rect.width, rect.height);</span><br><span class="line">      &#125;</span><br><span class="line">      // 第一次绘制</span><br><span class="line">      drawRect();</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h1><p>在实现 Canvas 游戏和动画中，往往需要解决物体相互碰撞的情况如。对于物体碰撞相关的问题，我们会在动画中采用 <code>碰撞检测</code> 来解决，以此实现更为逼真的动画。</p>
-<h2 id="碰撞检测关键步骤"><a href="#碰撞检测关键步骤" class="headerlink" title="碰撞检测关键步骤"></a>碰撞检测关键步骤</h2><p>碰撞检测需要处理经历下面两个关键的步骤：</p>
-<ul>
-<li>计算判断两个物体是否发生碰撞</li>
-<li>发生碰撞后，两个物体的状态和动画效果的处理</li>
-</ul>
-<h2 id="计算碰撞"><a href="#计算碰撞" class="headerlink" title="计算碰撞"></a>计算碰撞</h2><p>只要两个物体相互接触，它们就会发生碰撞。</p>
-<h3 id="矩形物体碰撞检测"><a href="#矩形物体碰撞检测" class="headerlink" title="矩形物体碰撞检测"></a>矩形物体碰撞检测</h3><p>假设检测发生碰撞的物体是 <strong>矩形1</strong> 和 <strong>矩形2</strong> 时，我们只需检测 <strong>矩形1</strong> 的上下左右四侧的和 <strong>矩形2</strong> 是否存在着距离。我们可以看看下面的图：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/crash-rect.png" alt="crash-rect.png"></p>
-<p>我们可以看到 <strong>矩形2</strong> 和 <strong>矩形1</strong> 之间没有发生碰撞共有四种可能的情况：</p>
-<ul>
-<li><strong>矩形2</strong>的右侧 离 <strong>矩形1</strong>的左侧有一段距离</li>
-<li><strong>矩形2</strong>的左侧 离 <strong>矩形1</strong>的右侧有一段距离</li>
-<li><strong>矩形2</strong>的底部 离 <strong>矩形1</strong>的顶部有一段距离</li>
-<li><strong>矩形2</strong>的顶部 离 <strong>矩形1</strong>的底部有一段距离</li>
-</ul>
-<p>当符合上面其中一种情况，则两个矩形没有发生碰撞。</p>
-<p>因此通过逆向推导我们可以得出：<code>当上面四种情况都不满足的时候，则代表两个矩形碰撞了</code>。在代码中，我们可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 判断四边是否都没有空隙</span><br><span class="line">if (!(rect2.x + rect2.width &lt; rect1.x) &amp;&amp;</span><br><span class="line">    !(rect1.x + rect1.width &lt; rect2.x) &amp;&amp;</span><br><span class="line">    !(rect2.y + rect2.height &lt; rect1.y) &amp;&amp;</span><br><span class="line">    !(rect1.y + rect1.height &lt; rect2.y)) &#123;</span><br><span class="line">    // 物体碰撞了</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="圆形物体碰撞检测"><a href="#圆形物体碰撞检测" class="headerlink" title="圆形物体碰撞检测"></a>圆形物体碰撞检测</h3><p>假设发生碰撞的物体是 <code>圆形</code> 时，检测碰撞则变得比较复杂了，前面矩形所使用的碰撞检测，并不能判断圆形物体的情况。如下图的情况：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/crash-circle.png" alt="crash-circle.png"></p>
-<p>那么如何检测两圆是否碰撞了呢？这个时候又到了考验我们数理化的知识了。</p>
-<p>检测两圆是否相交：<code>当两个圆心之间的距离是否小于两个圆的半径之和</code>。这是已经被证实的数学运算。如下图所示：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/crash-distance.png" alt="crash-distance.png"></p>
-<p>其中 <code>dx</code> 和 <code>dy</code> 分别表示两个圆之间的横坐标和纵坐标的差值。 即 <code>dx = x2 - x1;</code> <code>dy = y2 - y1;</code></p>
-<p>然后我们需要通过 <code>勾股定理</code> 计算两个圆心之间的距离。如下图：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/crash-gougu.png" alt="crash-gougu.png"></p>
-<p>因此我们碰撞检测的代码可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var dx = circle2.x - circle1.x;</span><br><span class="line">var dy = circle2.y - circle1.y;</span><br><span class="line">var distance = Math.sqrt((dx * dx) + (dy * dy));</span><br><span class="line">if (distance &lt; circle1.radius + circle2.radius) &#123;</span><br><span class="line">  // 两个圆形碰撞了</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>前面讲解了怎么检测矩形和圆形是否碰撞，基本已经可以适用大部分场景。对于特殊的场景，则需要大家自己去思考如何检测了。</p>
-<h3 id="碰撞后的处理"><a href="#碰撞后的处理" class="headerlink" title="碰撞后的处理"></a>碰撞后的处理</h3><p>当检测到碰撞后，则可以对碰撞的物体进行状态设置了，可以是相互毁灭，或者是反弹等。这里大家可以根据场景来决定。</p>
-<h1 id="canvas参考"><a href="#canvas参考" class="headerlink" title="canvas参考"></a>canvas参考</h1><h2 id="更多知识点"><a href="#更多知识点" class="headerlink" title="更多知识点"></a>更多知识点</h2><p>这里列出 Canvas 其他的知识点，感兴趣同学们可以深入了解下。</p>
-<ul>
-<li><a href="https://www.w3cplus.com/canvas/canvas-states.html" target="_blank" rel="noopener">保存和恢复绘画状态(save 和 store)</a></li>
-<li><a href="https://www.w3cplus.com/canvas/gradient.html" target="_blank" rel="noopener">渐变</a></li>
-<li><a href="https://oxcow.gitbooks.io/h5-canvas-study-notes/content/chapter6_shadows.html" target="_blank" rel="noopener">阴影</a></li>
-<li><a href="https://oxcow.gitbooks.io/h5-canvas-study-notes/content/chapter3_transform_func.html" target="_blank" rel="noopener">变形</a></li>
-<li><a href="https://www.w3cplus.com/canvas/compositing.html" target="_blank" rel="noopener">合成</a></li>
-<li><a href="http://www.w3school.com.cn/tags/canvas_getimagedata.asp" target="_blank" rel="noopener">导出画布（getImageData）</a></li>
-<li><a href="http://www.cnblogs.com/chyingp/archive/2012/12/01/canvas_pixel_api.html" target="_blank" rel="noopener">像素处理常用接口</a></li>
-</ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p>下面是一些推荐的 Canvas 学习书籍。</p>
-<p><strong>《HTML5 CANVAS基础教程》</strong><br>十分适合新手看的一本 canvas 书籍。</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/canvas-end-book1.png" alt="canvas-end-book1.png"></p>
-<p><strong>《HTML5 canvas开发详解》</strong></p>
-<p>是一本大而全的 canvas 书籍，覆盖的知识点比较多。如果希望全面了解 canvas 的可以看一下。</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/canvas-end-book2.png" alt="canvas-end-book2.png"><br>下面是一些推荐的学习 Canvas 的教程文章</p>
-<ul>
-<li><a href="https://www.w3cplus.com/blog/tags/604.html" target="_blank" rel="noopener">Canvas 入门精通教程</a></li>
-<li><a href="https://oxcow.gitbooks.io/h5-canvas-study-notes/content/chapter6_shadows.html" target="_blank" rel="noopener">HTML5 Canvas 学习笔记</a></li>
-<li><a href="https://wohugb.gitbooks.io/javascript/content/htmlapi/canvas.html" target="_blank" rel="noopener">Canvas API-阮一峰</a></li>
-</ul>
-<h1 id="图像裁剪"><a href="#图像裁剪" class="headerlink" title="图像裁剪"></a>图像裁剪</h1><p>前面我们讲到如何在 Canvas 中加载各种帅气酷炫的图像。但是有时候我们并不需要使用完整的图像，而只是图像的一部分内容，这个时候我们就需要使用<code>图像裁剪</code>。<code>图像裁剪</code>是图片 PS 中经常使用到的一种技术，目的是为了突出我们图片的某个特定的区域。接下来，让我们学习如何使用 Canvas 来裁剪我们的图像。</p>
-<h2 id="还是-context-drawImage"><a href="#还是-context-drawImage" class="headerlink" title="还是 context.drawImage()"></a>还是 context.drawImage()</h2><p>没错，你没看错，我们还是使用 <code>drawImage</code> 的方法。裁剪是 <code>drawImage</code> 方法的最后一种用法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.drawImage(image, source_x, source_y, source_width, source_height, x, y, width, heigh);</span><br></pre></td></tr></table></figure>
-<p>它总共涉及9个参数，具体如下：</p>
-<ul>
-<li><strong>image</strong>：源图像对象</li>
-<li><strong>source_x</strong>：源图像的裁剪区原点横坐标</li>
-<li><strong>source_y</strong>：源图像的裁剪区原点纵坐标</li>
-<li><strong>source_width</strong>：源图像的裁剪区宽度</li>
-<li><strong>source_height</strong>：源图像的裁剪区高度</li>
-<li><strong>x</strong>：在画布上绘制图像的原点横坐标</li>
-<li><strong>y</strong>：在画布上绘制图像的原点纵坐标</li>
-<li><strong>width</strong>：在画布上绘制图像的宽度</li>
-<li><strong>heigh</strong>：在画布上绘制图像的高度</li>
-</ul>
-<p>上面所有参数的看起来可能比较抽象，可以通过结合下面说明图进行理解：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/canvas-drawimage.png" alt="canvas-drawimage.png"></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>接下来让我们尝试截取图片的中间部分，如下图：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/canvas-drawimage-demo.png" alt="canvas-drawimage-demo.png"><br>相关代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;物体移动&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas id=&quot;canvas&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">      var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">      var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">      var image = new Image();</span><br><span class="line">      image.src = &apos;http://coding.imweb.io/img/p3/retina-pixel.jpg&apos;;</span><br><span class="line">      image.onload = function () &#123;</span><br><span class="line">        // 加载图片后，边截取图片且缩放展示在画布左上角</span><br><span class="line">        context.drawImage(image, 260, 260, 480, 480, 0, 0, 240, 240);</span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h1><h2 id="动画原理简介"><a href="#动画原理简介" class="headerlink" title="动画原理简介"></a>动画原理简介</h2><p>动画的基本原理是依靠人类具有视觉暂留的特性人的眼睛看到一幅画或一个物体后，在 1/24 秒内不会消失（即每秒钟至少更换24张画面）。利用这一原理，在一幅画（一帧）还没消失前播放下一幅画（下一帧），就会给人造成流畅的视觉变化效果。</p>
-<p>如下面的翻书动画，就是利用我们人的视觉暂留的特性的。</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/animation.gif" alt="animation.gif"><br>因此我们可以得出：<strong>如果我们需要实现动画，只需要设置定时不断地绘制下一帧的画面便可以了</strong>。</p>
-<h2 id="早期动画循环"><a href="#早期动画循环" class="headerlink" title="早期动画循环"></a>早期动画循环</h2><p>在 <code>JavaScript</code> 中我们可以使用 <code>setTimeout</code> 和 <code>setInterval</code> 来设置延时任务。<br>因此在很长时间以来，计时器一直都是 <code>JavaScript 动画</code>的最核心技术。如下面的代码就是使用 <code>setTimeout</code> 方法来实现基本的动画循环：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function animate() &#123;</span><br><span class="line">    // 动画内容</span><br><span class="line">    animation1();</span><br><span class="line">    animation2();</span><br><span class="line">    // 间隔100ms执行动画循环</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">        animate();</span><br><span class="line">    &#125;, 100);</span><br><span class="line">&#125;</span><br><span class="line">// 执行动画</span><br><span class="line">animate();</span><br></pre></td></tr></table></figure>
-<h2 id="循环间隔-60Hz"><a href="#循环间隔-60Hz" class="headerlink" title="循环间隔 60Hz"></a>循环间隔 60Hz</h2><p>早期的动画循环时候，最关键的问题是确定循环间隔的时长。一方面，循环间隔必须足够短，这样才能动画效果显得更平滑流畅；另一方面，循环时隔还要足够长，这样才能确保浏览器有能力渲染产生的变化。我们知道大多数的显示器的刷新频率是 60Hz ，即相当于在每秒钟中屏幕会重绘 60 次。因此最平滑动画的最佳循环间隔是 <code>1000ms/60</code>，约等于 16.7ms。</p>
-<h2 id="setTimeout-和-setInterval-问题"><a href="#setTimeout-和-setInterval-问题" class="headerlink" title="setTimeout 和 setInterval 问题"></a>setTimeout 和 setInterval 问题</h2><p>然后无论是 <code>setTimeout</code> 和 <code>setInterval</code> 都并不是十分精准。</p>
-<p>我们知道 <code>JavaScript</code> 是一个单线程的解释器，在一定时间能只能执行一段代码。为了要控制代码的执行顺序，就需要通过一个 <code>JavaScript任务队列</code> 来进行管理控制（任务会按照添加到队列的顺序执行）。通过 <code>setTimeout</code> 和 <code>setInterval</code> 我们能够设置延时多长时间把我们的代码任务添加到 <code>JavaScript任务队列</code> 中。如果当前任务队列是空的，那么添加的代码可以立即执行；如果队列不是空的，则新添加的任务需要等到其前面所有的任务都执行完成才能执行。由于前面的任务到底需要多少时间执行完，是不确定的，所以没有办法保证，<code>setTimeout</code> 和 <code>setInterval</code> 指定的任务，一定会按照预定时间执行。</p>
-<p>如下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(animateTask, 1000 / 60);</span><br><span class="line">// 耗时长的任务</span><br><span class="line">longTimeTask();</span><br></pre></td></tr></table></figure>
-<p>上面代码的 <code>setTimeout</code>，我们制定 16.7ms 后运行 <code>animateTask</code> 任务。但是，如果由于后面的 <code>longTimeTask</code> 执行（当前脚本的同步任务））非常耗时，即使过了 16.7ms 仍无法结束，那么延迟执行的 <code>animateTask</code> 就只有等着，只有等到前面的任务都运行完，才能轮到它执行。</p>
-<p>具体可阅读下 John Resig（jQuery 作者）的这篇文章 <a href="https://johnresig.com/blog/how-javascript-timers-work/" target="_blank" rel="noopener">How JavaScript Timers Work</a>。</p>
-<h2 id="requestAnimationFrame-1"><a href="#requestAnimationFrame-1" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><p>由于 <code>setTimeout</code> 和 <code>setInterval</code> 的不精准问题，促使了 <code>requestAnimationFrame</code> 的诞生。 <code>requestAnimationFrame</code> 是专门为实现高性能的帧动画而设计的一个API，目前已在多个浏览器得到了支持，你可以把它用在 DOM 上的效果切换或者 Canvas 画布动画中。 <code>requestAnimationFrame</code> 并不是定时器，但和 <code>setTimeout</code> 很相似，在没有 <code>requestAnimationFrame</code> 的浏览器一般都是用setTimeout模拟。 <code>requestAnimationFrame</code> 跟屏幕刷新同步（大多数是 60Hz ）。如果浏览器支持 <code>requestAnimationFrame</code> , 则不建议使用 <code>setTimeout</code> 来做动画。</p>
-<h2 id="requestAnimationFrame-的兼容使用"><a href="#requestAnimationFrame-的兼容使用" class="headerlink" title="requestAnimationFrame 的兼容使用"></a>requestAnimationFrame 的兼容使用</h2><p>下面是我们常规使用 <code>requestAnimationFrame</code> 的兼容写法，当浏览器不兼容的 <code>requestAnimationFrame</code> 时则通过使用 <code>setTimeout</code> 来模拟实现,且设定渲染间隔为 <code>1000ms/60</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 判断是否有 requestAnimationFrame 方法，如果有则模拟实现</span><br><span class="line">window.requestAnimFrame =</span><br><span class="line">window.requestAnimationFrame ||</span><br><span class="line">window.webkitRequestAnimationFrame ||</span><br><span class="line">window.mozRequestAnimationFrame ||</span><br><span class="line">window.oRequestAnimationFrame ||</span><br><span class="line">window.msRequestAnimationFrame ||</span><br><span class="line">function(callback) &#123;</span><br><span class="line">    window.setTimeout(callback, 1000 / 30);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="使用-requestAnimationFrame-实现动画"><a href="#使用-requestAnimationFrame-实现动画" class="headerlink" title="使用 requestAnimationFrame 实现动画"></a>使用 requestAnimationFrame 实现动画</h2><p>下面我们将使用 requestAnimationFrame 来实现一个物体来回移动的动画。效果如下：</p>
-<p><img src="/2019/01/21/前端知识归纳（5）-JS进阶（part4-canvas进阶）/requestAnimationFrame.gif" alt="requestAnimationFrame.gif"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;认识Canvas&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;canvas id=&quot;canvas&quot; width=&quot;500&quot; height=&quot;500&quot; style=&quot;border: 1px solid #33&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">        var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">        // 兼容定义 requestAnimFrame</span><br><span class="line">        window.requestAnimFrame =</span><br><span class="line">        window.requestAnimationFrame ||</span><br><span class="line">        window.webkitRequestAnimationFrame ||</span><br><span class="line">        window.mozRequestAnimationFrame ||</span><br><span class="line">        window.oRequestAnimationFrame ||</span><br><span class="line">        window.msRequestAnimationFrame ||</span><br><span class="line">        function(callback) &#123;</span><br><span class="line">            window.setTimeout(callback, 1000 / 30);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        // 绘制的圆的对象</span><br><span class="line">        var circle = &#123;</span><br><span class="line">            x: 250,</span><br><span class="line">            y: 250,</span><br><span class="line">            radius: 50,</span><br><span class="line">            direction: &apos;right&apos;,</span><br><span class="line">            // 移动圆形</span><br><span class="line">            move: function() &#123;</span><br><span class="line">                if (this.direction === &apos;right&apos;) &#123;</span><br><span class="line">                    if (this.x &lt;= 430) &#123;</span><br><span class="line">                         this.x += 5;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        this.direction = &apos;left&apos;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    if (this.x &gt;= 60) &#123;</span><br><span class="line">                         this.x -= 5;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        this.direction = &apos;right&apos;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            draw: function() &#123;</span><br><span class="line">                // 绘制圆形</span><br><span class="line">                context.beginPath();</span><br><span class="line">                // 设置开始角度为0，结束角度为 2π 弧度</span><br><span class="line">                context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);</span><br><span class="line">                context.fillStyle = &apos;#00c09b&apos;;</span><br><span class="line">                context.fill();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 动画执行函数</span><br><span class="line">        function animate() &#123;</span><br><span class="line">            // 随机更新圆形位置</span><br><span class="line">            circle.move();</span><br><span class="line">            // 清除画布</span><br><span class="line">            context.clearRect(0, 0, canvas.width, canvas.height);</span><br><span class="line">            // 绘画圆</span><br><span class="line">            circle.draw();</span><br><span class="line">            // 使用requestAnimationFrame实现动画循环</span><br><span class="line">            requestAnimationFrame(animate);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 先画第一帧的圆，即初始化的圆</span><br><span class="line">        circle.draw();</span><br><span class="line">        // 执行animate</span><br><span class="line">        animate();        </span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2639,7 +2565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2680,7 +2606,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2694,7 +2620,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.6k</span>
+    <span title="Site words total count">63.5k</span>
   
 </div>
 
