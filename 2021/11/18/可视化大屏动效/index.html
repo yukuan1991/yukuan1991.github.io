@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景本文主要针对在日常大屏项目跟进过程中使用到的动效做一些总结。 进场效果1、animate.css进场效果我推荐使用animate.css，它有如下几个特点:  开源免费 - 基于MIT开源协议，被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。 使用简单 - 只有一个CSS文件，引入后以类的方式进行调用，如果使用jquery，则不影响原有程序架构 文件小，响应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可视化大屏动效">
+<meta property="og:url" content="http://yoursite.com/2021/11/18/可视化大屏动效/index.html">
+<meta property="og:site_name" content="Sponge的个人博客">
+<meta property="og:description" content="背景本文主要针对在日常大屏项目跟进过程中使用到的动效做一些总结。 进场效果1、animate.css进场效果我推荐使用animate.css，它有如下几个特点:  开源免费 - 基于MIT开源协议，被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。 使用简单 - 只有一个CSS文件，引入后以类的方式进行调用，如果使用jquery，则不影响原有程序架构 文件小，响应">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/animate.gif">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/gsap_general.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/gsap_to.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/gsap_to.gif">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/gsap_autoAlpha.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/gsap_fromTo.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/gsap_project.gif">
+<meta property="og:updated_time" content="2021-11-24T06:02:57.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="可视化大屏动效">
+<meta name="twitter:description" content="背景本文主要针对在日常大屏项目跟进过程中使用到的动效做一些总结。 进场效果1、animate.css进场效果我推荐使用animate.css，它有如下几个特点:  开源免费 - 基于MIT开源协议，被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。 使用简单 - 只有一个CSS文件，引入后以类的方式进行调用，如果使用jquery，则不影响原有程序架构 文件小，响应">
+<meta name="twitter:image" content="http://yoursite.com/2021/11/18/可视化大屏动效/animate.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/11/18/可视化大屏动效/">
+
+
+
+
+
+  <title>可视化大屏动效 | Sponge的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sponge的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/18/可视化大屏动效/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">可视化大屏动效</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-18T16:07:52+08:00">
+                2021-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/11/18/可视化大屏动效/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/11/18/可视化大屏动效/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要针对在日常大屏项目跟进过程中使用到的动效做一些总结。</p>
+<h2 id="进场效果"><a href="#进场效果" class="headerlink" title="进场效果"></a>进场效果</h2><h3 id="1、animate-css"><a href="#1、animate-css" class="headerlink" title="1、animate.css"></a>1、animate.css</h3><p>进场效果我推荐使用animate.css，它有如下几个特点:</p>
+<ul>
+<li>开源免费 - 基于MIT开源协议，被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。</li>
+<li>使用简单 - 只有一个CSS文件，引入后以类的方式进行调用，如果使用jquery，则不影响原有程序架构</li>
+<li>文件小，响应快 - 体积小巧，只有几十k的大小，响应速度非常快</li>
+</ul>
+<p>用法：</p>
+<p><code>html</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;!-- 引入css --&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&apos;css/animate.min.css&apos;&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;con-l&quot;&gt;</span><br><span class="line">            &lt;!-- 使用对应类名 --&gt;</span><br><span class="line">            &lt;div class=&quot;box box1 animate__animated animate__bounceInLeft&quot;&gt;&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;box box2 animate__animated animate__bounceInLeft&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>还可通过css设置动画的延时属性，使得模块依次进场：</p>
+<p><code>scss</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.con-l &#123;</span><br><span class="line">    .box2 &#123;</span><br><span class="line">        animation-delay: 300ms;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/18/可视化大屏动效/animate.gif" alt="animate.gif"></p>
+<h3 id="2、GSAP-GreenSock-Animation-Platform"><a href="#2、GSAP-GreenSock-Animation-Platform" class="headerlink" title="2、GSAP-GreenSock Animation Platform"></a>2、GSAP-GreenSock Animation Platform</h3><p>在网页上创建动画，我们会很快想到 <code>jQuery</code>的 <code>animate()</code> 方法，或者是 <code>css3</code>的 <code>animation</code> 和 <code>transition</code> 属性。而今天主要介绍另一个web动画的可选方法：GSAP。</p>
+<p><code>GSAP</code>是在Flash动画时代就存在的 <code>Javascript</code> 动画库,它具有如下几个优点：</p>
+<ul>
+<li>速度快。GSAP专门优化了动画性能，使之实现和CSS一样的高性能动画效果。</li>
+<li>轻量与模块化。模块化与插件式的结构保持了核心引擎的轻量，TweenLite包非常小（基本上低于7kb）。GSAP提供了 <code>TweenLite</code> , <code>TimelineLite</code> , <code>TimelineMax</code> 和 <code>TweenMax</code> 不同功能的动画模块，你可以按需使用。</li>
+<li>没有依赖。</li>
+<li>灵活控制。不用受限于线性序列，可以重叠动画序列，你可以通过精确时间控制，灵活地使用最少的代码实现动画。</li>
+<li>任何对象都可以实现动画。</li>
+</ul>
+<p><img src="/2021/11/18/可视化大屏动效/gsap_general.png" alt="gsap_general.png"></p>
+<p>在开始前准备一些基本代码，如下所示：</p>
+<p><code>html</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;box&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><code>css</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  background-color: #262626;</span><br><span class="line">  font-family: &apos;Open Sans&apos;, sans-serif;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">#box &#123;</span><br><span class="line">  background-color: #88ce02;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 50%;</span><br><span class="line">  left: 50%;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  transform: translate(-50%, -50%);</span><br><span class="line">  z-index: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="TweenLite-to-方法"><a href="#TweenLite-to-方法" class="headerlink" title="TweenLite.to() 方法"></a><code>TweenLite.to()</code> 方法</h4><p>这个方法可以定义元素的结束状态，从而实现css设置的样式到定义的状态的动画过渡。</p>
+<p>下图为 <code>TweenLite.to()</code> 方法的示意图：</p>
+<p><img src="/2021/11/18/可视化大屏动效/gsap_to.png" alt="gsap_to.png"></p>
+<p>在 <code>js</code> 中运行如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TweenLite.to($box, 0.7, &#123;left: 0&#125;);</span><br></pre></td></tr></table></figure>
+<p>在浏览器中，会看到在0.7秒之内把$box元素从CSS中定义的位置移动到body的左侧边缘。</p>
+<p><img src="/2021/11/18/可视化大屏动效/gsap_to.gif" alt="gsap_to.gif"></p>
+<h4 id="TweenLite-from-方法"><a href="#TweenLite-from-方法" class="headerlink" title="TweenLite.from() 方法"></a><code>TweenLite.from()</code> 方法</h4><p>这个方法是用来使元素从定义在.from()方法里的位置运动到在CSS中定义的位置。</p>
+<p>在 <code>js</code> 中运行如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TweenLite.from($box, 2, &#123;x: &apos;-=200px&apos;, autoAlpha: 0&#125;);</span><br></pre></td></tr></table></figure>
+<p>运行这个例子，我们会看到元素从元素左边200px的位置运动到元素在CSS中定义的位置。<br>autoAlpha方法是GSAP中一个特别的属性，它把opacity和visibility两个属性合二为一了。</p>
+<p><img src="/2021/11/18/可视化大屏动效/gsap_autoAlpha.png" alt="gsap_autoAlpha.png"></p>
+<h4 id="TweenLite-set-方法"><a href="#TweenLite-set-方法" class="headerlink" title="TweenLite.set() 方法"></a><code>TweenLite.set()</code> 方法</h4><p>如果只是想设置元素的一些CSS属性并不需要动画效果，比如，重设元素的位置。</p>
+<p>这个时候就可以使用GreenSock提供的.set()方法。</p>
+<h4 id="TweenLite-fromTo-方法"><a href="#TweenLite-fromTo-方法" class="headerlink" title="TweenLite.fromTo() 方法"></a><code>TweenLite.fromTo()</code> 方法</h4><p>这个方法可以定义元素的起始位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TweenLite.fromTo($box, 2, &#123;x: &apos;-=200px&apos;&#125;, &#123;x: 150&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/18/可视化大屏动效/gsap_fromTo.png" alt="gsap_fromTo.png"></p>
+<p>下面不妨让我们来看看它在实际项目中的表现吧。</p>
+<p><img src="/2021/11/18/可视化大屏动效/gsap_project.gif" alt="gsap_project.gif"></p>
+<p>显然它的功能不止于此，还有许多api可供大家选择使用。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.animate.net.cn/" target="_blank" rel="noopener">Animate中文网</a></p>
+<p><a href="https://greensock.com/docs/" target="_blank" rel="noopener">GreenSock官方文档</a></p>
+<p><a href="https://www.tweenmax.com.cn/index.html" target="_blank" rel="noopener">TweenMax中文网</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/26/基于WASM的H265-Web播放器/" rel="next" title="基于WASM的H265 Web播放器">
+                <i class="fa fa-chevron-left"></i> 基于WASM的H265 Web播放器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sponge</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进场效果"><span class="nav-number">2.</span> <span class="nav-text">进场效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、animate-css"><span class="nav-number">2.1.</span> <span class="nav-text">1、animate.css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、GSAP-GreenSock-Animation-Platform"><span class="nav-number">2.2.</span> <span class="nav-text">2、GSAP-GreenSock Animation Platform</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TweenLite-to-方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">TweenLite.to() 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TweenLite-from-方法"><span class="nav-number">2.2.2.</span> <span class="nav-text">TweenLite.from() 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TweenLite-set-方法"><span class="nav-number">2.2.3.</span> <span class="nav-text">TweenLite.set() 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TweenLite-fromTo-方法"><span class="nav-number">2.2.4.</span> <span class="nav-text">TweenLite.fromTo() 方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sponge</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">65.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JAytK8dtYmfQUns7Dd8iG9zC-gzGzoHsz',
+        appKey: 'Y3ImYMhiFYr5d6sIuyK3ej0Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

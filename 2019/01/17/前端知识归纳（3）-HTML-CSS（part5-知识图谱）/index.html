@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="知识图谱首先对我们学过的知识进行一个简单的图谱总结，以方便大家系统认识及查漏补缺：  由于 CSS 脑图图片比较大，如图片不清晰，可新窗口打开图片或查看 CSS 脑图高清版。  CSS 标准、支持及未来然后在整个课程中，我们模糊了 CSS2 与 CSS3 的界限，而是统一称为 CSS，也很少刻意去说兼容的问题，这是因为 CSS3 已经出来很多年了，浏览器的发展也非常迅猛，所有的不兼容都是暂时的，最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识归纳（3）-- HTML&#x2F;CSS（part5 知识图谱）">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/index.html">
+<meta property="og:site_name" content="Sponge的个人博客">
+<meta property="og:description" content="知识图谱首先对我们学过的知识进行一个简单的图谱总结，以方便大家系统认识及查漏补缺：  由于 CSS 脑图图片比较大，如图片不清晰，可新窗口打开图片或查看 CSS 脑图高清版。  CSS 标准、支持及未来然后在整个课程中，我们模糊了 CSS2 与 CSS3 的界限，而是统一称为 CSS，也很少刻意去说兼容的问题，这是因为 CSS3 已经出来很多年了，浏览器的发展也非常迅猛，所有的不兼容都是暂时的，最">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/html.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/css.png">
+<meta property="og:updated_time" content="2019-03-20T08:09:01.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识归纳（3）-- HTML&#x2F;CSS（part5 知识图谱）">
+<meta name="twitter:description" content="知识图谱首先对我们学过的知识进行一个简单的图谱总结，以方便大家系统认识及查漏补缺：  由于 CSS 脑图图片比较大，如图片不清晰，可新窗口打开图片或查看 CSS 脑图高清版。  CSS 标准、支持及未来然后在整个课程中，我们模糊了 CSS2 与 CSS3 的界限，而是统一称为 CSS，也很少刻意去说兼容的问题，这是因为 CSS3 已经出来很多年了，浏览器的发展也非常迅猛，所有的不兼容都是暂时的，最">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/html.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/">
+
+
+
+
+
+  <title>前端知识归纳（3）-- HTML/CSS（part5 知识图谱） | Sponge的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sponge的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端知识归纳（3）-- HTML/CSS（part5 知识图谱）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T14:20:03+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  704
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h2><p>首先对我们学过的知识进行一个简单的图谱总结，以方便大家系统认识及查漏补缺：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/html.png" alt="html"></p>
+<p>由于 CSS 脑图图片比较大，如图片不清晰，可新窗口打开图片或<a href="http://naotu.baidu.com/file/d2e931b2d0ae2add59e6b49903736725?token=48f0609ca3107975" target="_blank" rel="noopener">查看 CSS 脑图高清版</a>。</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part5-知识图谱）/css.png" alt="css"></p>
+<h2 id="CSS-标准、支持及未来"><a href="#CSS-标准、支持及未来" class="headerlink" title="CSS 标准、支持及未来"></a>CSS 标准、支持及未来</h2><p>然后在整个课程中，我们模糊了 CSS2 与 CSS3 的界限，而是统一称为 CSS，也很少刻意去说兼容的问题，这是因为 CSS3 已经出来很多年了，浏览器的发展也非常迅猛，所有的不兼容都是暂时的，最终我们将迎来空前的繁盛。</p>
+<p>从 CSS3 开始 CSS 属性是按照功能模块来分开开发的，每个模块开发完毕就会进入下一个版本，这样持续更新迭代发展，而整个 CSS 的大版本还是一致保留在 3 这个阶段，所以不存在 CSS4，但是存在某个模块版本的4，5，6…</p>
+<ul>
+<li><a href="https://drafts.csswg.org/" target="_blank" rel="noopener">CSS Working Group Editor Drafts</a></li>
+<li><a href="http://yisibl.github.io/css3test/" target="_blank" rel="noopener">CSS3 test</a></li>
+<li><a href="http://caniuse.com/" target="_blank" rel="noopener">Can I use</a></li>
+<li><a href="https://www.w3ctech.com/topic/1735" target="_blank" rel="noopener">Houdini：也许是你从未听过的在CSS领域最令人兴奋的发展</a></li>
+</ul>
+<h2 id="CSS-规范"><a href="#CSS-规范" class="headerlink" title="CSS 规范"></a>CSS 规范</h2><p>如果你有一些代码洁癖，或者进入某个团队，然后发现大家的代码风格各不相同，维护代码时一团乱麻，这个时候一份统一的规范就很有用了。规范相对来说比较灵活，各个团队可以根据自己团队制定不同的规范，下面是一些规范推荐：</p>
+<ul>
+<li><a href="http://www.shejidaren.com/css-written-specifications.html" target="_blank" rel="noopener">推荐大家使用的CSS书写规范、顺序</a></li>
+<li><a href="https://segmentfault.com/a/1190000007023192" target="_blank" rel="noopener">[译]谷歌 HTML/CSS 规范</a></li>
+<li><a href="https://github.com/fex-team/styleguide/blob/master/css.md" target="_blank" rel="noopener">CSS编码规范</a></li>
+</ul>
+<h2 id="个人经验与推荐"><a href="#个人经验与推荐" class="headerlink" title="个人经验与推荐"></a>个人经验与推荐</h2><h3 id="常逛站点"><a href="#常逛站点" class="headerlink" title="常逛站点"></a>常逛站点</h3><ul>
+<li><a href="http://css-weekly.com/" target="_blank" rel="noopener">CSS Weekly</a></li>
+<li><a href="https://css-tricks.com/" target="_blank" rel="noopener">CSS Trick</a></li>
+<li><a href="https://www.smashingmagazine.com/" target="_blank" rel="noopener">Smashing magazine</a></li>
+<li><a href="https://www.sitepoint.com/" target="_blank" rel="noopener">Sitepoint</a></li>
+<li><a href="https://tympanus.net/codrops/" target="_blank" rel="noopener">codrops</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="noopener">MDN</a></li>
+<li><a href="http://www.w3cplus.com/" target="_blank" rel="noopener">W3cplus</a></li>
+<li><a href="http://codepen.io/" target="_blank" rel="noopener">Codepen</a>（在线编辑代码工具）</li>
+</ul>
+<h3 id="个人重构经验"><a href="#个人重构经验" class="headerlink" title="个人重构经验"></a>个人重构经验</h3><ul>
+<li><a href="http://imweb.io/topic/55e1d253771670e207a16bb2" target="_blank" rel="noopener">HTML 整站结构设计</a></li>
+<li><a href="http://imweb.io/topic/55ea599844d58914555d5e57" target="_blank" rel="noopener">HTML 结构的拆与合</a></li>
+<li><a href="http://imweb.io/topic/55eb092244d58914555d5e5a" target="_blank" rel="noopener">CSS 设计中的不变与可变</a></li>
+<li><a href="http://imweb.io/topic/5623c25734764b2c16769749" target="_blank" rel="noopener">class 命名方法</a></li>
+<li><a href="https://github.com/imweb/sheral" target="_blank" rel="noopener">sheral 移动端重构</a></li>
+<li><a href="https://github.com/marvin1023/mark" target="_blank" rel="noopener">重构优秀教程合集</a></li>
+</ul>
+<h3 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h3><ul>
+<li>《CSS 权威指南》：本书内容主要是 CSS2，虽然 CSS3 部分只涉及了一些选择器，但是对于基础、原理什么的讲解得非常好，非常值得入门。</li>
+<li>《图解 CSS3》：本书是 <a href="http://www.w3cplus.com/" target="_blank" rel="noopener">w3cplus</a> 站长所写，由于 CSS3 的发展比较快，所以书中有些内容都已经过时，不过最近作者正在升级更新第二版，建议到时入手。</li>
+<li>《CSS揭秘》：本书是集 CSS 经验技巧的大成之作，里面有作者的各种经验及感悟，非常值得入手。</li>
+<li>《响应式Web设计：HTML5和CSS3实战（第2版）》：看书名就知道是讲响应式的，对响应式理解不是很深的可以入手。</li>
+<li>《SVG 精髓》：从入门到精通，全方位涵盖 SVG 技术，你值得拥有。目前最新版本为第二版。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/前端知识归纳（3）-HTML-CSS（part4-Sass）/" rel="next" title="前端知识归纳（3）-- HTML/CSS（part4 Sass）">
+                <i class="fa fa-chevron-left"></i> 前端知识归纳（3）-- HTML/CSS（part4 Sass）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/18/前端知识归纳（4）-JS基础（part1-javascript语言基础）/" rel="prev" title="前端知识归纳（4）-- JS基础（part1 javascript语言基础）">
+                前端知识归纳（4）-- JS基础（part1 javascript语言基础） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sponge</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识图谱"><span class="nav-number">1.</span> <span class="nav-text">知识图谱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-标准、支持及未来"><span class="nav-number">2.</span> <span class="nav-text">CSS 标准、支持及未来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-规范"><span class="nav-number">3.</span> <span class="nav-text">CSS 规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人经验与推荐"><span class="nav-number">4.</span> <span class="nav-text">个人经验与推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常逛站点"><span class="nav-number">4.1.</span> <span class="nav-text">常逛站点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人重构经验"><span class="nav-number">4.2.</span> <span class="nav-text">个人重构经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#书籍推荐"><span class="nav-number">4.3.</span> <span class="nav-text">书籍推荐</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sponge</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">65.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JAytK8dtYmfQUns7Dd8iG9zC-gzGzoHsz',
+        appKey: 'Y3ImYMhiFYr5d6sIuyK3ej0Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

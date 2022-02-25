@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="React 体系React 库到目前为止，大家已经学习了 React 的基本内容，算是入门了。 当然，受课程内容限制，我们只能带大家了解 React 使用的最基本的概念，有些原理性或者高级的概念在课程里面没有介绍到，比如虚拟 DOM 概念，PropTypes，高阶组件等等，感兴趣的同学可以研究下。研究过程中如果感到摸不着头脑，不要慌，很正常，把问题放在脑子里，然后花更多的时间研究。  虚拟 Dom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识归纳（7）-- JS应用开发（part4 React）">
+<meta property="og:url" content="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/index.html">
+<meta property="og:site_name" content="Sponge的个人博客">
+<meta property="og:description" content="React 体系React 库到目前为止，大家已经学习了 React 的基本内容，算是入门了。 当然，受课程内容限制，我们只能带大家了解 React 使用的最基本的概念，有些原理性或者高级的概念在课程里面没有介绍到，比如虚拟 DOM 概念，PropTypes，高阶组件等等，感兴趣的同学可以研究下。研究过程中如果感到摸不着头脑，不要慌，很正常，把问题放在脑子里，然后花更多的时间研究。  虚拟 Dom">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-20T08:09:01.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识归纳（7）-- JS应用开发（part4 React）">
+<meta name="twitter:description" content="React 体系React 库到目前为止，大家已经学习了 React 的基本内容，算是入门了。 当然，受课程内容限制，我们只能带大家了解 React 使用的最基本的概念，有些原理性或者高级的概念在课程里面没有介绍到，比如虚拟 DOM 概念，PropTypes，高阶组件等等，感兴趣的同学可以研究下。研究过程中如果感到摸不着头脑，不要慌，很正常，把问题放在脑子里，然后花更多的时间研究。  虚拟 Dom">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/">
+
+
+
+
+
+  <title>前端知识归纳（7）-- JS应用开发（part4 React） | Sponge的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sponge的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端知识归纳（7）-- JS应用开发（part4 React）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T11:38:21+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  597
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="React-体系"><a href="#React-体系" class="headerlink" title="React 体系"></a>React 体系</h1><h2 id="React-库"><a href="#React-库" class="headerlink" title="React 库"></a>React 库</h2><p>到目前为止，大家已经学习了 React 的基本内容，算是入门了。</p>
+<p>当然，受课程内容限制，我们只能带大家了解 React 使用的最基本的概念，有些原理性或者高级的概念在课程里面没有介绍到，比如虚拟 DOM 概念，PropTypes，高阶组件等等，感兴趣的同学可以研究下。研究过程中如果感到摸不着头脑，不要慌，很正常，把问题放在脑子里，然后花更多的时间研究。</p>
+<ul>
+<li><a href="http://www.alloyteam.com/2015/10/react-virtual-analysis-of-the-dom/" target="_blank" rel="noopener">虚拟 Dom</a></li>
+<li><a href="https://doc.react-china.org/react/docs/typechecking-with-proptypes.html" target="_blank" rel="noopener">PropTypes</a></li>
+<li><a href="https://doc.react-china.org/react/docs/higher-order-components.html" target="_blank" rel="noopener">高阶组件</a></li>
+</ul>
+<p>下面给大家提供一些学习的资源，供大家参考。</p>
+<p>首先是 React 的<a href="https://facebook.github.io/react/" target="_blank" rel="noopener">官网</a>(<a href="https://doc.react-china.org/" target="_blank" rel="noopener">翻译版</a>)，React 官方文档还是比较容易看懂的，还有附带教程，大家也可以跟着官方教程去练习。我们推荐最原始的英文官网，因为那里是更新的最快最及时的。</p>
+<p>另外大家推荐一本小书， <a href="http://huziketang.com/books/react/" target="_blank" rel="noopener">React.js 小书</a>，这本书比较适合新手，由浅入深，讲得还不错。</p>
+<h2 id="React-的衍生"><a href="#React-的衍生" class="headerlink" title="React 的衍生"></a>React 的衍生</h2><p>我们经常说的 React ，可以称为 React Core ，2011 年由 Facebook 工程师 Jordan Walke 创建，六七年时间过去了，React 现在是一个巨无霸。</p>
+<p>React Core 有很大的变化，它进一步的分化出了 React Core、React DOM、React Server 。Core 不多说，React DOM 是用于浏览器，React Server 用于 Nodejs ，它的魔爪已经伸向了服务端，就是这个服务端渲染的特性被很多框架所借鉴，算是开启了一个时代。</p>
+<p>围绕这个 React Core ，大批量的辅助库涌现了出来，典型的如 <a href="https://github.com/ReactTraining/react-router" target="_blank" rel="noopener">React Router</a>、<a href="https://github.com/reactjs/redux" target="_blank" rel="noopener">Redux</a> ，生态越来庞大，于是又有了 <a href="https://ant.design/index-cn" target="_blank" rel="noopener">ant-design</a>这些大而全的框架。</p>
+<p>前端和服务端都被 React 占领，它还没有停歇，触角又伸向了 iOS 和 Android ，<a href="https://facebook.github.io/react-native/" target="_blank" rel="noopener">React-Native</a> ，从此我们可以用 HTML CSS JS 写出手机端应用。</p>
+<p>所以啊，在众多的库和框架当中，我们选择 React 介绍给大家。如果说前端是一个世界，那么 React 从这个世界衍生出了一个更为广阔的世界。现在给大家开了一扇窗，如果喜欢，你们就要靠自己的双手开出一扇门了，努力！</p>
+<h2 id="一些资源"><a href="#一些资源" class="headerlink" title="一些资源"></a>一些资源</h2><ul>
+<li><a href="https://facebook.github.io/react/" target="_blank" rel="noopener">React 官网</a></li>
+<li><a href="https://doc.react-china.org/" target="_blank" rel="noopener">官网翻译版</a></li>
+<li><a href="http://huziketang.com/books/react/" target="_blank" rel="noopener">React.js 小书</a></li>
+<li><a href="http://www.alloyteam.com/2015/10/react-virtual-analysis-of-the-dom/" target="_blank" rel="noopener">虚拟 Dom</a></li>
+<li><a href="https://doc.react-china.org/docs/typechecking-with-proptypes.html" target="_blank" rel="noopener">PropTypes</a></li>
+<li><a href="https://doc.react-china.org/docs/higher-order-components.html" target="_blank" rel="noopener">高阶组件</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/" rel="next" title="前端知识归纳（7）-- JS应用开发（part3 设计模式）">
+                <i class="fa fa-chevron-left"></i> 前端知识归纳（7）-- JS应用开发（part3 设计模式）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/28/前端知识归纳（8）-安全攻防战/" rel="prev" title="前端知识归纳（8）-- 安全攻防战">
+                前端知识归纳（8）-- 安全攻防战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sponge</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-体系"><span class="nav-number">1.</span> <span class="nav-text">React 体系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-库"><span class="nav-number">1.1.</span> <span class="nav-text">React 库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-的衍生"><span class="nav-number">1.2.</span> <span class="nav-text">React 的衍生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些资源"><span class="nav-number">1.3.</span> <span class="nav-text">一些资源</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sponge</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">65.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JAytK8dtYmfQUns7Dd8iG9zC-gzGzoHsz',
+        appKey: 'Y3ImYMhiFYr5d6sIuyK3ej0Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="transition![屏幕快照 2018-02-27 22.52.36.png] 概述transform 本意是变形，变换之意，在 CSS 中使用该属性可对元素进行移动（translate）、旋转（rotate）、缩放（scale）、倾斜（skew）等效果。因其有着各种特效及优良的性能，所以成为动画的标配。 在学习之前，我们可以简单欣赏下几个案例：  transform 简单 demo flip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识归纳（3）-- HTML&#x2F;CSS（part2 CSS动画）">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/index.html">
+<meta property="og:site_name" content="Sponge的个人博客">
+<meta property="og:description" content="transition![屏幕快照 2018-02-27 22.52.36.png] 概述transform 本意是变形，变换之意，在 CSS 中使用该属性可对元素进行移动（translate）、旋转（rotate）、缩放（scale）、倾斜（skew）等效果。因其有着各种特效及优良的性能，所以成为动画的标配。 在学习之前，我们可以简单欣赏下几个案例：  transform 简单 demo flip">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-2.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-3.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-4.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/translate.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/scale.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/rotate.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/skew.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/mix.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/origin-top-left.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/origin-right.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/origin-px.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-0.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-2.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-3.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-4.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-5.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-6.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/animation.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/animate.css.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/magic_animations.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/hover.css.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/effeckt.css.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/css_spiners.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/frame-full.jpg">
+<meta property="og:updated_time" content="2019-03-20T08:09:01.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识归纳（3）-- HTML&#x2F;CSS（part2 CSS动画）">
+<meta name="twitter:description" content="transition![屏幕快照 2018-02-27 22.52.36.png] 概述transform 本意是变形，变换之意，在 CSS 中使用该属性可对元素进行移动（translate）、旋转（rotate）、缩放（scale）、倾斜（skew）等效果。因其有着各种特效及优良的性能，所以成为动画的标配。 在学习之前，我们可以简单欣赏下几个案例：  transform 简单 demo flip">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/">
+
+
+
+
+
+  <title>前端知识归纳（3）-- HTML/CSS（part2 CSS动画） | Sponge的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sponge的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端知识归纳（3）-- HTML/CSS（part2 CSS动画）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T14:10:10+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h1><p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-1.png" alt="transition-1"><br><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-2.png" alt="transition-2"><br><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-3.png" alt="transition-3"><br>![屏幕快照 2018-02-27 22.52.36.png]<img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/transition-4.png" alt="transition-4"></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>transform 本意是变形，变换之意，在 CSS 中使用该属性可对元素进行移动（translate）、旋转（rotate）、缩放（scale）、倾斜（skew）等效果。因其有着各种特效及优良的性能，所以成为动画的标配。</p>
+<p>在学习之前，我们可以简单欣赏下几个案例：</p>
+<ul>
+<li><a href="http://coding.imweb.io/demo/p3/transform/transform.html" target="_blank" rel="noopener">transform 简单 demo</a></li>
+<li><a href="http://desandro.github.io/3dtransforms/examples/card-01.html" target="_blank" rel="noopener">flip card</a></li>
+<li><a href="http://desandro.github.io/3dtransforms/examples/cube-02-show-sides.html" target="_blank" rel="noopener">Cube - show sides</a></li>
+</ul>
+<h2 id="二维（2D）变换"><a href="#二维（2D）变换" class="headerlink" title="二维（2D）变换"></a>二维（2D）变换</h2><h3 id="translate"><a href="#translate" class="headerlink" title="translate"></a>translate</h3><p>其语法为：<code>transform: translate(tx[, ty])</code>。其中 tx 表示 x 方向偏移，ty 表示 y 方向偏移，如果 ty 没有指定值则为0。</p>
+<p>还可以分拆为：<code>transform: translateX(tx)</code> 或 <code>transform: translateY(ty)</code>。</p>
+<p>简单示例如下（虚线框表示原先位置）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: translate(50px, 30px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/translate.png" alt="translate"></p>
+<p>注：tx，ty 如果为百分比值的话，其参考计算的是元素本身的宽和高，而不是父元素的宽和高。所以经常使用该方法设置定位居中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.demo &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 50%; /* 父元素高度的一半位置 */</span><br><span class="line">  left: 50%; /* 父元素宽度的一半位置 */</span><br><span class="line">  transform: translate(-50%, -50%); /* 元素本身的一半宽、高 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="scale"><a href="#scale" class="headerlink" title="scale"></a>scale</h3><p>其语法为：<code>transform: scale(sx[, sy])</code>。其中 sx 表示 x 方向的缩放比例，sy 表示 y 方向的缩放比例，如果 sy 没有指定值则与 sx 相等。</p>
+<p>同样也可以分拆为：<code>transform: scaleX(sx)</code> 和 <code>transform: scaleY(sy)</code></p>
+<p>简单示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: scale(1.2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/scale.png" alt="scale"></p>
+<h3 id="rotate"><a href="#rotate" class="headerlink" title="rotate"></a>rotate</h3><p>其语法为：<code>transform: rotate(angle)</code>。angle 表示顺时针角度。</p>
+<p>简单示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: rotate(15deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/rotate.png" alt="rotate"></p>
+<h3 id="skew"><a href="#skew" class="headerlink" title="skew"></a>skew</h3><p>其语法为：<code>transform: skew(ax[, ay])</code>。其中 ax 表示 x 方向的顺时针角度，ay 表示 y 方向的顺时针角度，如果 ay 没有指定值则 y 方向没有倾斜。</p>
+<p>简单示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: skew(30deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/skew.png" alt="skew"></p>
+<h3 id="复合变换"><a href="#复合变换" class="headerlink" title="复合变换"></a>复合变换</h3><p>上面几个变换，都可以自由组合形成更复杂的复合变换。</p>
+<p>简单示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: translate(30px) rotate(10deg) skew(0, 5deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/mix.png" alt="mix"></p>
+<p>以上所有示例在线查看地址： <a href="http://coding.imweb.io/demo/p3/transform/transform.html" target="_blank" rel="noopener">transform 简单 demo</a></p>
+<h3 id="变换中心点"><a href="#变换中心点" class="headerlink" title="变换中心点"></a>变换中心点</h3><p>默认上面所有的变换都是以元素的中心位置为参考原点的，不过我们可以通过属性 <code>transform-origin</code> 来改变参考原点。</p>
+<p>其语法为：<code>transform-origin: ox oy</code>。其中 ox 表示 x 方向的位置，可使用 <code>left</code>、<code>right</code>、<code>center</code>、<code>&lt;length&gt;</code>、<code>&lt;percentage&gt;</code>，oy 表示 y 方向的位置，可使用<code>top</code>、<code>bottom</code>、<code>center</code>、<code>&lt;length&gt;</code>、<code>&lt;percentage&gt;</code>。如果只传入一个值，则另一个值默认为 50%</p>
+<p>简单示例如下（在线 <a href="http://coding.imweb.io/demo/p3/transform/transform-origin.html" target="_blank" rel="noopener">demo</a>）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: rotate(15deg);</span><br><span class="line">&#125;</span><br><span class="line">.box-origin-top-left &#123;</span><br><span class="line">    transform-origin: left top;</span><br><span class="line">&#125;</span><br><span class="line">.box-origin-right &#123;</span><br><span class="line">    transform-origin: right; /* 设置一个值，则另一个为50% */</span><br><span class="line">&#125;</span><br><span class="line">.box-origin-px &#123;</span><br><span class="line">    transform-origin: 200px 80%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/origin-top-left.png" alt="origin-top-left"></p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/origin-right.png" alt="origin-right"></p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/origin-px.png" alt="origin-px"></p>
+<h3 id="trasform-2D-的本质-——-矩阵变换"><a href="#trasform-2D-的本质-——-矩阵变换" class="headerlink" title="trasform 2D 的本质 —— 矩阵变换"></a>trasform 2D 的本质 —— 矩阵变换</h3><p>上面我们已经简单了解了 transform 2D 的基本语法，接下来简单探讨下 transform 2D 的本质。</p>
+<p>transform 2D 除了以上的四种基本语法（translate、rotate、scale、skew）外，还有一个矩阵语法，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform: matrix(a, b, c, d, e, f);</span><br></pre></td></tr></table></figure>
+<p>上面 <code>matrix(a, b, c, d, e, f)</code> 的形式用矩阵符号表示，是这样的：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-0.png" alt="matrix-0"></p>
+<p>需要注意的是，第三行是固定的，都是 <code>0,0,1</code> ，所以 CSS 语法中省去了这一行。因为涉及到 <code>x</code>、<code>y</code> 及旋转，所以二维变换需要三个变量来表示。</p>
+<p>下面我们具体以实例了解下矩阵是如何用来表示变换的，以上面的 translate 为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    transform: translate(50px, 30px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面 css 代码的意思是说，把所有点都相对于 <strong>原点</strong> （通过 <code>transform-origin</code> 指定，默认为中心点），往 <code>x</code> 正方向平移 <code>50px</code>，往 <code>y</code> 正方向平移 <code>30px</code>。用数学表达式表示就是：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-1.png" alt="matrix-1"></p>
+<p>这里 tx = 50px ，ty = 30px。稍微变换一下，x’ 和 x，y 都相关，写成如下的形式：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-2.png" alt="matrix-2"></p>
+<p>把两行的x、y系数取出来，再补充一行（为什么多了一行？为了运算方便，看下图也许就清楚了），得下面的语法形式—— <strong>矩阵运算</strong>：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-3.png" alt="matrix-3"></p>
+<p>那么，变换的本质是什么？就是把一组 <code>(x, y)</code> 通过算术运算，变为新的坐标 <code>(x&#39;,y&#39;)</code> ，刚好 <strong>矩阵</strong> 这种数学工具就可以用来描述这种数学变换。通用的二维矩阵变换就是：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-4.png" alt="matrix-4"></p>
+<h3 id="常见的二维变换"><a href="#常见的二维变换" class="headerlink" title="常见的二维变换"></a>常见的二维变换</h3><p>上面公式的最左边的矩阵，通常是如下几种基本形式组合而成：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-5.png" alt="matrix-5"><br>如果每个变换，都用 matrix 语法来表示，要写很多参数，显然这样是不合理的。所以有了四个基本的简化写法：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/matrix-6.png" alt="matrix-6"></p>
+<h2 id="三维（3D）变换"><a href="#三维（3D）变换" class="headerlink" title="三维（3D）变换"></a>三维（3D）变换</h2><p>3D 变换大概有如下几种使用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">transform: translate3d(12px, 50%, 3em);</span><br><span class="line">transform: translateZ(2px);</span><br><span class="line">transform: scale3d(2.5, 1.2, 0.3);</span><br><span class="line">transform: scaleZ(0.3);</span><br><span class="line">transform: rotate3d(1, 2.0, 3.0, 10deg);</span><br><span class="line">transform: rotateX(10deg);</span><br><span class="line">transform: rotateY(10deg);</span><br><span class="line">transform: rotateZ(10deg);</span><br><span class="line">transform: perspective(17px);</span><br><span class="line">transform: matrix3d(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0);</span><br></pre></td></tr></table></figure>
+<p>3D 变换的复杂性及可以创造的特效远超 2D 变换。由于篇幅有限且深入掌握的话需要一定的想象力，这里就做不详细介绍了。</p>
+<p>推荐两篇高质量入门文章如下：</p>
+<ul>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/" target="_blank" rel="noopener">CSS3 3D transform变换</a></li>
+<li><a href="http://desandro.github.io/3dtransforms/" target="_blank" rel="noopener">Intro to CSS 3D transforms</a></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.w3cplus.com/content/css3-transform" target="_blank" rel="noopener">CSS3 Transform</a></li>
+<li><a href="https://www.sitepoint.com/advanced-css3-2d-and-3d-transform-techniques/" target="_blank" rel="noopener">Advanced CSS3 2D and 3D Transform Techniques</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform" target="_blank" rel="noopener">transform | MDN</a></li>
+<li><a href="https://github.com/SamHwang1990/blog/issues/4" target="_blank" rel="noopener">深入浅出CSS Transform</a></li>
+<li><a href="http://mengqi92.github.io/2016/05/20/linear-algebra-3/" target="_blank" rel="noopener">线性代数拾遗（三）：线性变换以及矩阵的意义</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/06/css3-transform-matrix-%E7%9F%A9%E9%98%B5/" target="_blank" rel="noopener">理解CSS3 transform中的Matrix(矩阵)</a></li>
+<li><a href="https://dev.opera.com/articles/understanding-the-css-transforms-matrix/" target="_blank" rel="noopener">understanding-the-css-transforms-matrix</a></li>
+<li><a href="http://www.senocular.com/flash/tutorials/transformmatrix/" target="_blank" rel="noopener">transformmatrix</a></li>
+<li><a href="http://www.useragentman.com/blog/2011/01/07/css3-matrix-transform-for-the-mathematically-challenged/" target="_blank" rel="noopener">css3-matrix-transform-for-the-mathematically-challenged</a></li>
+</ul>
+<h1 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h1><p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/animation.png" alt="animation"></p>
+<h1 id="常见-CSS-动画库"><a href="#常见-CSS-动画库" class="headerlink" title="常见 CSS 动画库"></a>常见 CSS 动画库</h1><p>自从 CSS3 有了动画功能，从此 Web 页面就迈进“忽如一夜春风来，千页万页动画开”的盛况。 所以 CSS 动画除了是炫技之选更是一项基本技能，当然也就有无数前辈为之呕心沥血总结经验了。这里我们站在巨人肩上，为大家推荐一些常见且十分好用的 CSS 动画库，既可以用来学习也可用来提高工作效率。</p>
+<h2 id="Animate-css"><a href="#Animate-css" class="headerlink" title="Animate.css"></a><a href="https://daneden.github.io/animate.css/" target="_blank" rel="noopener">Animate.css</a></h2><p>Animate.css 是最早的也是目前最流行和最易于使用的CSS动画库之一，其包含了60多款不同类型的 CSS 动画如晃动、闪动、淡出淡出效果等，如果你想快速的使用各种 CSS 动画特效的话，你可以选择它。</p>
+<ul>
+<li>创作者：Daniel Eden</li>
+<li>发行：2013年</li>
+<li>当前版本：3.5.2</li>
+<li>人气：GitHub上有40000+的star</li>
+<li>未压缩大小：72kB</li>
+<li>GitHub：<a href="https://github.com/daneden/animate.css" target="_blank" rel="noopener">https://github.com/daneden/animate.css</a></li>
+</ul>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/animate.css.png" alt="animate.css"></p>
+<h2 id="Magic-CSS3-Animation"><a href="#Magic-CSS3-Animation" class="headerlink" title="Magic CSS3 Animation"></a><a href="https://www.minimamente.com/example/magic_animations/" target="_blank" rel="noopener">Magic CSS3 Animation</a></h2><p>Magic CSS3 Animations 是一个特殊效果的 CSS 动画库，你可以免费用于你的 Web 项目，简单的引用 CSS 样式：magic.css 或 magic.min.css （压缩版）即可。该项目提供了一个特别酷的演示应用程序。与 animate.css 相比，Magic CSS3 Animation 的大小适中，它的特色动画，如魔法效果，愚蠢的效果和炸弹效果十分出众和特别。</p>
+<ul>
+<li>创作者：Christian</li>
+<li>发行：2014年</li>
+<li>当前版本：1.1.0</li>
+<li>人气：GitHub上有4700+的star</li>
+<li>未压缩大小：20.5kb</li>
+<li>GitHub：<a href="https://github.com/miniMAC/magic" target="_blank" rel="noopener">https://github.com/miniMAC/magic</a></li>
+</ul>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/magic_animations.png" alt="magic_animations"></p>
+<h2 id="Hover-CSS"><a href="#Hover-CSS" class="headerlink" title="Hover CSS"></a><a href="http://ianlunn.github.io/Hover/" target="_blank" rel="noopener">Hover CSS</a></h2><p>Hover.css 是一个 CSS 动画库，专为您的网站中的按钮和其他 UI 元素而设计。它具有非常好的2D转换，以及许多其他精心制作的动画。</p>
+<ul>
+<li>创作者： Ian Lunn</li>
+<li>发行：2013年</li>
+<li>当前版本：2.1.1</li>
+<li>人气：GitHub上有16000+的star</li>
+<li>未压缩大小：100+kb</li>
+<li>GitHub：<a href="https://github.com/IanLunn/Hover" target="_blank" rel="noopener">https://github.com/IanLunn/Hover</a></li>
+</ul>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/hover.css.png" alt="hover.css"></p>
+<h2 id="Effeckt"><a href="#Effeckt" class="headerlink" title="Effeckt"></a><a href="http://h5bp.github.io/Effeckt.css/" target="_blank" rel="noopener">Effeckt</a></h2><p>Effeckt.css 是一个集合了众多新鲜而又实用的的 CSS/jQuery 动画效果，这些都适用于网站或是移动 APP 的网页，比如一些 AJAX 弹出框动画、菜单动画、图片标题展示等等，这些特效动画都能给你的网站提升一定用户体验，而且简单实用。</p>
+<ul>
+<li>创作者：paulirish</li>
+<li>发行：2013年</li>
+<li>当前版本：0.5.0</li>
+<li>人气：GitHub上有10900+的star</li>
+<li>GitHub：<a href="https://github.com/h5bp/Effeckt.css" target="_blank" rel="noopener">https://github.com/h5bp/Effeckt.css</a></li>
+</ul>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/effeckt.css.png" alt="effeckt.css"></p>
+<h2 id="Single-Element-CSS-Spinners"><a href="#Single-Element-CSS-Spinners" class="headerlink" title="Single Element CSS Spinners"></a><a href="https://projects.lukehaas.me/css-loaders/" target="_blank" rel="noopener">Single Element CSS Spinners</a></h2><p>在页面中，我们时常需要使用 gif 图片来实现比较炫酷的 loading 动画。Single Element CSS Spinners是一个CSS螺旋加载动画的集合。使用Single Element CSS Spinners 来替代 gif 来实现螺旋加载动画，不仅减少了请求图片的次数，同时还能够通过代码来灵活地修改动画的参数。</p>
+<ul>
+<li>创作者：Lukehaas</li>
+<li>发行：2014年</li>
+<li>当前版本：1.0.0</li>
+<li>人气：GitHub上有4700+的star</li>
+<li>未压缩大小：10kB</li>
+<li>GitHub：<a href="https://github.com/lukehaas/css-loaders" target="_blank" rel="noopener">https://github.com/lukehaas/css-loaders</a></li>
+</ul>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/css_spiners.png" alt="css_spiners"><br>注：一般不建议全部拿来使用，而是使用哪个动画效果就拷贝对应的样式。</p>
+<h1 id="动画性能优化"><a href="#动画性能优化" class="headerlink" title="动画性能优化"></a>动画性能优化</h1><p>CSS3 动画给 Web 的用户体验带来了巨大提升，本文将尝试从浏览器渲染的角度，来解析动画优化的原理及其技巧。为大家提供一些动画性能优化的参考。</p>
+<h2 id="60fps-与设备刷新率"><a href="#60fps-与设备刷新率" class="headerlink" title="60fps 与设备刷新率"></a>60fps 与设备刷新率</h2><p>目前大多数设备的屏幕刷新率为60fps（Frame per Second），即每秒60帧。因此，如果在页面中有一个动画或渐变效果，或者用户正在滚动页面，那么浏览器渲染动画或页面的每一帧的速率也需要跟设备屏幕的刷新率保持一致，即每一帧要在16毫秒（1S/60 = 16.66ms）之内完成。如果无法完成，由于帧率的下降会导致内容在屏幕上抖动。 <strong>此现象通常称为卡顿，会对用户体验产生负面影响</strong>。</p>
+<h2 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h2><p>在讲性能之前，我们需要先对浏览器渲染页面有一个基础的理解。</p>
+<h3 id="CSS-图层"><a href="#CSS-图层" class="headerlink" title="CSS 图层"></a>CSS 图层</h3><p>浏览器在渲染一个页面时，会将页面分为很多个图层，图层有大有小，每个图层上有一个或多个节点。需要注意的是，如果图层中某个元素需要重绘，那么整个图层都需要重绘（关于重绘下面会讲到）。</p>
+<h3 id="渲染过程"><a href="#渲染过程" class="headerlink" title="渲染过程"></a>渲染过程</h3><p>简单来说，浏览器的渲染过程其实就是将页面转换成像素显示到屏幕上，大致有如下几个步骤：</p>
+<p><img src="/2019/01/17/前端知识归纳（3）-HTML-CSS（part2-CSS动画）/frame-full.jpg" alt="frame-full"></p>
+<ul>
+<li>Javascript操作： 一般来说，我们会使用 JavaScript 来实现一些交互操作。比如用往页面里添加一些元素，切换显示隐藏等</li>
+<li>style 样式计算： 该过程根据 CSS 选择器，获取每个元素匹配的 CSS 样式并计算其最终应用样式</li>
+<li>Layout 布局：该过程计算元素要占据的空间大小及其在屏幕的位置。网页的布局模式意味着一个元素可能影响其他元素，例如 <code>&lt;body&gt;</code> 元素的宽度一般会影响其子元素的宽度以及树中各处的节点，因此对于浏览器来说，布局是经常发生的</li>
+<li>Paint 绘制：本质上就是填充像素的过程。包括绘制文字、颜色、图像、边框和阴影等。也就是绘制元素所有的可视效果</li>
+<li>Composite 渲染层合并：在每个层上完成绘制过程之后，浏览器会将所有层按照合理的顺序合并成一个图层，然后显示在屏幕上</li>
+</ul>
+<p>如果我们需要提高动画的性能，需要做的就是减少浏览器在动画运行时所需要做的工作。当 CSS 在进行动画时，其不同属性值引起的改变，重新渲染可能会有三种执行路径：</p>
+<ul>
+<li>A：<code>layout -&gt; paint -&gt; composite</code></li>
+<li>B：<code>paint -&gt; composite</code></li>
+<li>C：<code>composite</code></li>
+</ul>
+<p>很明显，最短路径的 C 动画性能是最高的，所以我们在使用动画的时候就得考虑使用什么属性，以尽量减少执行路径。</p>
+<h2 id="动画属性"><a href="#动画属性" class="headerlink" title="动画属性"></a>动画属性</h2><p>CSS 的属性大致分为三类：布局类（layout），绘制类（paint），合成类（composite）。</p>
+<h3 id="重排（reflow）"><a href="#重排（reflow）" class="headerlink" title="重排（reflow）"></a>重排（reflow）</h3><p>由元素的布局类属性改变所触发的行为过程，我们称为 reflow，也叫做 relayout（重新布局）。当某个节点 reflow 时会重新计算节点的尺寸和位置，还可能会引起其它节点的 reflow。</p>
+<p>该系列属性的改变，会执行路径 A 进行重新渲染，所以性能是最差的。（这充分说明，重排会引起重绘）</p>
+<h4 id="触发重排的属性"><a href="#触发重排的属性" class="headerlink" title="触发重排的属性"></a>触发重排的属性</h4><p>盒子模型相关属性会触发重布局：</p>
+<ul>
+<li>width</li>
+<li>height</li>
+<li>padding</li>
+<li>margin</li>
+<li>display</li>
+<li>border-width</li>
+<li>border</li>
+<li>min-height</li>
+</ul>
+<p>定位属性及浮动也会触发重布局：</p>
+<ul>
+<li>top</li>
+<li>bottom</li>
+<li>left</li>
+<li>right</li>
+<li>position</li>
+<li>float</li>
+<li>clear</li>
+</ul>
+<p>改变节点内部文字结构也会触发重布局：</p>
+<ul>
+<li>text-align</li>
+<li>overflow-y</li>
+<li>font-weight</li>
+<li>overflow</li>
+<li>font-family</li>
+<li>line-height</li>
+<li>vertival-align</li>
+<li>white-space</li>
+<li>font-size</li>
+</ul>
+<h3 id="重绘（repaint）"><a href="#重绘（repaint）" class="headerlink" title="重绘（repaint）"></a>重绘（repaint）</h3><p>由绘制类属性改变触发节点重新绘制其可视效果的过程，我们称为 repaint。</p>
+<p>该系列属性的改变，会执行路径 B，所以性能一般。</p>
+<h4 id="触发重绘的属性"><a href="#触发重绘的属性" class="headerlink" title="触发重绘的属性"></a>触发重绘的属性</h4><p>修改时只触发重绘的属性有：</p>
+<ul>
+<li>color</li>
+<li>border-style</li>
+<li>border-radius</li>
+<li>visibility</li>
+<li>text-decoration</li>
+<li>background</li>
+<li>background-image</li>
+<li>background-position</li>
+<li>background-repeat</li>
+<li>background-size</li>
+<li>outline-color</li>
+<li>outline</li>
+<li>outline-style</li>
+<li>outline-width</li>
+<li>box-shadow</li>
+</ul>
+<p>上面的属性由于不会修改节点的大小和位置，因此不会触发重排，其只是改变了节点内部的渲染效果，所以只会进行重绘以下的步骤。</p>
+<h3 id="composite"><a href="#composite" class="headerlink" title="composite"></a>composite</h3><p>目前只有两个属性属于 composite 类：</p>
+<ul>
+<li>transform</li>
+<li>opactiy</li>
+</ul>
+<p>该系列属性的改变，会执行路径 C，所以性能最佳。</p>
+<p>如果想了解更多 CSS 中会影响 Layout、Paint 和 Composite 的属性，可参考：<a href="https://csstriggers.com/" target="_blank" rel="noopener">CSS Triggers</a>。</p>
+<h2 id="优化技巧"><a href="#优化技巧" class="headerlink" title="优化技巧"></a>优化技巧</h2><h3 id="减少动画元素"><a href="#减少动画元素" class="headerlink" title="减少动画元素"></a>减少动画元素</h3><p>减少动画元素，是动画性能优化中首先需要完成的。通过审查页面动画 DOM 元素结构，去除不必要的动画元素，减少元素的数量，相应地会减少布页面局和绘制的时间。</p>
+<h3 id="尽量使用-fixed、absolute-定位"><a href="#尽量使用-fixed、absolute-定位" class="headerlink" title="尽量使用 fixed、absolute 定位"></a>尽量使用 fixed、absolute 定位</h3><p>对于动画元素，尽量使用用 fixed、absolute 定位方式，避免影响到其他节点重排。</p>
+<h3 id="尽量只改变transform和opacity"><a href="#尽量只改变transform和opacity" class="headerlink" title="尽量只改变transform和opacity"></a>尽量只改变transform和opacity</h3><p>能用 transform、opacity 优先使用，其属性的改变不会发生重排和重绘。如位移操作的，可以使用translate 来实现，渐隐渐现效果可以使用 opacity 属性来实现。</p>
+<h3 id="恰当开启硬件加速效果"><a href="#恰当开启硬件加速效果" class="headerlink" title="恰当开启硬件加速效果"></a>恰当开启硬件加速效果</h3><p>对动画元素应用<code>transform: translate3d(0, 0, 0)</code>、<code>will-change: transform</code> 等来开启硬件加速。通常开启硬件加速可以让动画变得更加流畅。但这里需注意，在不需要的时候需去掉避免过多的内存消耗。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">transform: translate3d(0, 0, 0);</span><br><span class="line"></span><br><span class="line">transform: translateZ(0);</span><br><span class="line"></span><br><span class="line">will-change: transform;</span><br></pre></td></tr></table></figure>
+<h2 id="更多阅读"><a href="#更多阅读" class="headerlink" title="更多阅读"></a>更多阅读</h2><ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/" target="_blank" rel="noopener">渲染性能</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/前端知识归纳（3）-HTML-CSS（part1-css布局）/" rel="next" title="前端知识归纳（3）-- HTML/CSS（part1 css布局）">
+                <i class="fa fa-chevron-left"></i> 前端知识归纳（3）-- HTML/CSS（part1 css布局）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/前端知识归纳（3）-HTML-CSS（part3-响应式）/" rel="prev" title="前端知识归纳（3）-- HTML/CSS（part3 响应式）">
+                前端知识归纳（3）-- HTML/CSS（part3 响应式） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sponge</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transition"><span class="nav-number">1.</span> <span class="nav-text">transition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维（2D）变换"><span class="nav-number">1.2.</span> <span class="nav-text">二维（2D）变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#translate"><span class="nav-number">1.2.1.</span> <span class="nav-text">translate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scale"><span class="nav-number">1.2.2.</span> <span class="nav-text">scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rotate"><span class="nav-number">1.2.3.</span> <span class="nav-text">rotate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skew"><span class="nav-number">1.2.4.</span> <span class="nav-text">skew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合变换"><span class="nav-number">1.2.5.</span> <span class="nav-text">复合变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变换中心点"><span class="nav-number">1.2.6.</span> <span class="nav-text">变换中心点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trasform-2D-的本质-——-矩阵变换"><span class="nav-number">1.2.7.</span> <span class="nav-text">trasform 2D 的本质 —— 矩阵变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的二维变换"><span class="nav-number">1.2.8.</span> <span class="nav-text">常见的二维变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三维（3D）变换"><span class="nav-number">1.3.</span> <span class="nav-text">三维（3D）变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#animation"><span class="nav-number">2.</span> <span class="nav-text">animation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见-CSS-动画库"><span class="nav-number">3.</span> <span class="nav-text">常见 CSS 动画库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Animate-css"><span class="nav-number">3.1.</span> <span class="nav-text">Animate.css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Magic-CSS3-Animation"><span class="nav-number">3.2.</span> <span class="nav-text">Magic CSS3 Animation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hover-CSS"><span class="nav-number">3.3.</span> <span class="nav-text">Hover CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Effeckt"><span class="nav-number">3.4.</span> <span class="nav-text">Effeckt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Element-CSS-Spinners"><span class="nav-number">3.5.</span> <span class="nav-text">Single Element CSS Spinners</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画性能优化"><span class="nav-number">4.</span> <span class="nav-text">动画性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#60fps-与设备刷新率"><span class="nav-number">4.1.</span> <span class="nav-text">60fps 与设备刷新率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器渲染"><span class="nav-number">4.2.</span> <span class="nav-text">浏览器渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-图层"><span class="nav-number">4.2.1.</span> <span class="nav-text">CSS 图层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染过程"><span class="nav-number">4.2.2.</span> <span class="nav-text">渲染过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画属性"><span class="nav-number">4.3.</span> <span class="nav-text">动画属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重排（reflow）"><span class="nav-number">4.3.1.</span> <span class="nav-text">重排（reflow）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#触发重排的属性"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">触发重排的属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重绘（repaint）"><span class="nav-number">4.3.2.</span> <span class="nav-text">重绘（repaint）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#触发重绘的属性"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">触发重绘的属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#composite"><span class="nav-number">4.3.3.</span> <span class="nav-text">composite</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化技巧"><span class="nav-number">4.4.</span> <span class="nav-text">优化技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少动画元素"><span class="nav-number">4.4.1.</span> <span class="nav-text">减少动画元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量使用-fixed、absolute-定位"><span class="nav-number">4.4.2.</span> <span class="nav-text">尽量使用 fixed、absolute 定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量只改变transform和opacity"><span class="nav-number">4.4.3.</span> <span class="nav-text">尽量只改变transform和opacity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恰当开启硬件加速效果"><span class="nav-number">4.4.4.</span> <span class="nav-text">恰当开启硬件加速效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读"><span class="nav-number">4.5.</span> <span class="nav-text">更多阅读</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sponge</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">65.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JAytK8dtYmfQUns7Dd8iG9zC-gzGzoHsz',
+        appKey: 'Y3ImYMhiFYr5d6sIuyK3ej0Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

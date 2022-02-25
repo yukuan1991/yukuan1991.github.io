@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="单例模式确保一个类只有一个实例共享使用。优点：节省资源，控制入口。缺点：拓展困难，不可指责过重。适合的例子：  网站的登录框 网站的计时器 应用程序中可全局访问的配置对象  适配器模式适配器模式的使用场景事实上，适配器模式可以说是一种“亡羊补牢”的模式适配器模式，其并不是我们设计之初想要使用到的。 因为如果我们系统和应用原本的接口能够正常工作的话，相信我们并不会使用上适配器模式。然而在业务中，我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识归纳（7）-- JS应用开发（part3 设计模式）">
+<meta property="og:url" content="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/index.html">
+<meta property="og:site_name" content="Sponge的个人博客">
+<meta property="og:description" content="单例模式确保一个类只有一个实例共享使用。优点：节省资源，控制入口。缺点：拓展困难，不可指责过重。适合的例子：  网站的登录框 网站的计时器 应用程序中可全局访问的配置对象  适配器模式适配器模式的使用场景事实上，适配器模式可以说是一种“亡羊补牢”的模式适配器模式，其并不是我们设计之初想要使用到的。 因为如果我们系统和应用原本的接口能够正常工作的话，相信我们并不会使用上适配器模式。然而在业务中，我们">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/mvc.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/mvvm.png">
+<meta property="og:updated_time" content="2019-03-20T08:09:01.671Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识归纳（7）-- JS应用开发（part3 设计模式）">
+<meta name="twitter:description" content="单例模式确保一个类只有一个实例共享使用。优点：节省资源，控制入口。缺点：拓展困难，不可指责过重。适合的例子：  网站的登录框 网站的计时器 应用程序中可全局访问的配置对象  适配器模式适配器模式的使用场景事实上，适配器模式可以说是一种“亡羊补牢”的模式适配器模式，其并不是我们设计之初想要使用到的。 因为如果我们系统和应用原本的接口能够正常工作的话，相信我们并不会使用上适配器模式。然而在业务中，我们">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/mvc.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/">
+
+
+
+
+
+  <title>前端知识归纳（7）-- JS应用开发（part3 设计模式） | Sponge的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sponge的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端知识归纳（7）-- JS应用开发（part3 设计模式）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T10:30:39+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>确保一个类只有一个实例共享使用。<br>优点：节省资源，控制入口。<br>缺点：拓展困难，不可指责过重。<br>适合的例子：</p>
+<ul>
+<li>网站的登录框</li>
+<li>网站的计时器</li>
+<li>应用程序中可全局访问的配置对象</li>
+</ul>
+<h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="适配器模式的使用场景"><a href="#适配器模式的使用场景" class="headerlink" title="适配器模式的使用场景"></a>适配器模式的使用场景</h2><p>事实上，适配器模式可以说是一种“亡羊补牢”的模式适配器模式，其并不是我们设计之初想要使用到的。</p>
+<p>因为如果我们系统和应用原本的接口能够正常工作的话，相信我们并不会使用上适配器模式。然而在业务中，我们经常会发现，对于过去能够好好工作的接口，或许在未来的某一天却发现已经不能适用于新的系统了。此时如果对系统进行重构耗费的精力和时间太大了。</p>
+<p>这时候我们就可以考虑使用<strong>适配器模式把旧接口包装成一个新的接口，使它继续保持生命力。</strong></p>
+<h1 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h1><p>在不修改类原来的接口下，动态地为对象添加功能。</p>
+<h1 id="ES7-的-Decorator"><a href="#ES7-的-Decorator" class="headerlink" title="ES7 的 Decorator"></a>ES7 的 Decorator</h1><p>在许多面向对象的语言中都有<strong>装饰器（Decorator）</strong>，用来增加类的功能和职责。</p>
+<p>令人喜悦的是，在未来的 JavaScript 中也引入了这个概念，目前 babel 对这个概念也有很好的支持。如果你是一个喜欢尝试新技术的开发者，可以借助 babel 来大胆使用它。下面让我们来了解一下更多内容。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p><code>Decorator</code> 在目前还只是一个提议。如果你现在就想要体验使用的话，可以通过下面两种方法：</p>
+<h3 id="通过使用-Babel-来转换使用"><a href="#通过使用-Babel-来转换使用" class="headerlink" title="通过使用 Babel 来转换使用"></a>通过使用 <code>Babel</code> 来转换使用</h3><ol>
+<li><p>首先全局安装babel组件模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel -g</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>命令行开启 <code>Decorator</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">babel --optional es7.decorators test.js &gt; test.es5.js</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="通过-在线的-REPL-提前体验"><a href="#通过-在线的-REPL-提前体验" class="headerlink" title="通过 在线的 REPL 提前体验"></a>通过 <a href="http://babeljs.io/repl/" target="_blank" rel="noopener">在线的 REPL</a> 提前体验</h3><p>Babel 的官方网站提供一个在线转码器，其支持 Decorator 的在线转码。</p>
+<h2 id="JavaScript-的-Decorator"><a href="#JavaScript-的-Decorator" class="headerlink" title="JavaScript 的 Decorator"></a>JavaScript 的 Decorator</h2><p><strong>装饰器（Decorator）</strong> 在现代编程语言中是相当普遍的。事实上，JavaScript 装饰器的语法与 Python 装饰器的语法非常相似。有以下两种用法：</p>
+<ul>
+<li>装饰类</li>
+<li>装饰类的方法</li>
+</ul>
+<h2 id="装饰类"><a href="#装饰类" class="headerlink" title="装饰类"></a>装饰类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@superManPower</span><br><span class="line">class Man &#123;</span><br><span class="line">  // some code</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 装饰器函数</span><br><span class="line">function superManPower(target) &#123;</span><br><span class="line">  target.super = true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 等同于</span><br><span class="line">class Man &#123;&#125;</span><br><span class="line">// 装饰器函数 superFunc</span><br><span class="line">function superManPower(target) &#123;</span><br><span class="line">  this.super = true;</span><br><span class="line">&#125;</span><br><span class="line">Man = superManPower(Man) || Man;</span><br></pre></td></tr></table></figure>
+<p>上面是简单的一个 <strong>装饰器（Decorator）</strong> 的例子，其中</p>
+<ul>
+<li><code>@superManPower</code> 则为使用<strong>装饰器 superManPower</strong></li>
+<li><strong>装饰器 superManPower</strong> 修改了类 <code>Man</code> 的行为，给其加上静态属性 <code>super</code></li>
+<li><p>此时装饰器函数是一个对类进行处理的函数。其第一个参数为需要被装饰的目标类，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 装饰器函数</span><br><span class="line">function superManPower(target) &#123;</span><br><span class="line">  // target 即为被装饰的目标</span><br><span class="line">  target.super = true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="装饰类的方法"><a href="#装饰类的方法" class="headerlink" title="装饰类的方法"></a>装饰类的方法</h2><p>装饰器除了可以装饰我们的类之外，还可以修饰类的属性方法。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function superInitPower(attack, defense) &#123;</span><br><span class="line">  return function(target, key, descriptor) &#123;</span><br><span class="line">    // 保存方法</span><br><span class="line">    const method = descriptor.value;</span><br><span class="line">    // 修改方法</span><br><span class="line">    descriptor.value = (...args)=&gt;&#123;</span><br><span class="line">      // 增加攻击力和防御力</span><br><span class="line">      args[0] += 100;</span><br><span class="line">      args[1] += 100;</span><br><span class="line">      // 调用原本的方法</span><br><span class="line">      return method.apply(target, args);</span><br><span class="line">    &#125;</span><br><span class="line">  return descriptor;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Man &#123;</span><br><span class="line">  @superInitPower</span><br><span class="line">  init(attack, defense) &#123;</span><br><span class="line">    this.attack = attack; // 初始攻击力</span><br><span class="line">    this.defense = defense; // 初始攻击力</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时，装饰器函数可以接受三个参数，和我们的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty()</a> 的参数基本保持一致，分别表示如下：</p>
+<ul>
+<li><p>第一个参数 <code>target</code> 表示修饰的目标对象 即类的实例</p>
+<blockquote>
+<p>这不同于之前装饰类，之前装饰类 <code>target</code> 表示的是类本身</p>
+</blockquote>
+</li>
+<li><p>第二个参数 <code>key</code> 表示需要装饰的属性名</p>
+</li>
+<li><p>第三个参数 <code>descriptor</code> 是该属性的描述对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// descriptor 对象的值</span><br><span class="line">&#123;</span><br><span class="line">  value: specifiedFunction, // 指定的方法</span><br><span class="line">  enumerable: false, // 是否可遍历迭代</span><br><span class="line">  configurable: true, </span><br><span class="line">  writable: true</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="多层装饰器"><a href="#多层装饰器" class="headerlink" title="多层装饰器"></a>多层装饰器</h2><p>我们可以同时使用多个装饰器，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@healthy</span><br><span class="line">class Person &#123;</span><br><span class="line">  @runFase</span><br><span class="line">  @eatHuge</span><br><span class="line">  init() &#123; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例如上面的，我们使用了多个装饰器，增加类和类的方法的职责。</p>
+<h2 id="更多参数"><a href="#更多参数" class="headerlink" title="更多参数"></a>更多参数</h2><p>上面我们看到装饰器参数都是固定的，对于一些场景可能会不够用。此时我们通过包装一层函数的方式来增加参数，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 装饰器函数 - 增加参数</span><br><span class="line">function superFunc(num, canUse) &#123;</span><br><span class="line">  return function(target) &#123;</span><br><span class="line">    target.canUse = canUse;</span><br><span class="line">    target.num = num;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 因此下面我们就可以这样调用</span><br><span class="line">@superFunc(1, true)</span><br><span class="line">class Base1() &#123;&#125;</span><br><span class="line">Base1.canUse; // true</span><br><span class="line">Base1.num; // 1</span><br><span class="line"></span><br><span class="line">@superFunc(2, false)</span><br><span class="line">class Base2() &#123;&#125;</span><br><span class="line">Base2.canUse; // false</span><br><span class="line">Base2.num; // 2</span><br></pre></td></tr></table></figure>
+<p>上面中，我们看到装饰器 <code>superFunc</code> 是可以接受参数，通过各种参数来增强装饰器的能力。</p>
+<p><code>注: 装饰器对类的行为的改变，是代码编译时发生的，而不是在运行时。这意味着，装饰器本质就是编译时执行的函数。</code></p>
+<h3 id="不能装饰普通函数"><a href="#不能装饰普通函数" class="headerlink" title="不能装饰普通函数"></a>不能装饰普通函数</h3><p>事实上 <strong>装饰器（Decorator）</strong> 只使用与装饰类和类的方法，不能使用于普通函数。这是因为变量提升会产生系列的问题。这里大家可以查看更多阅读来了解相关的问题详情。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>我们常常使用 <strong>装饰器（Decorator）</strong> 来实现 <a href="http://qingbob.com/aop-programming/" target="_blank" rel="noopener">AOP(面向切面编程)</a>。例如前面我们习题讲到的日志，也是非常经典的应用：[日志系统]。(<a href="http://taobaofed.org/blog/2015/11/16/es7-decorator/#4%E3%80%81%E7%BB%8F%E5%85%B8%E5%AE%9E%E7%8E%B0%EF%BC%9ALogger" target="_blank" rel="noopener">http://taobaofed.org/blog/2015/11/16/es7-decorator/#4%E3%80%81%E7%BB%8F%E5%85%B8%E5%AE%9E%E7%8E%B0%EF%BC%9ALogger</a>)</p>
+<h2 id="更多阅读"><a href="#更多阅读" class="headerlink" title="更多阅读"></a>更多阅读</h2><p>想要了解更多知识，大家可以阅读以下的资料文献。</p>
+<ul>
+<li><a href="https://github.com/wycats/javascript-decorators" target="_blank" rel="noopener">javascript-decorators</a></li>
+<li><a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841" target="_blank" rel="noopener">Exploring EcmaScript Decorators</a></li>
+<li><a href="https://ponyfoo.com/articles/javascript-decorators-proposal" target="_blank" rel="noopener">ECMAScript Proposal for JavaScript Decorators<br>(and protocols)</a></li>
+<li><a href="http://es6.ruanyifeng.com/#docs/decorator" target="_blank" rel="noopener">ECMAScript 6 入门 - 阮一峰</a></li>
+</ul>
+<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="实现事件监听"><a href="#实现事件监听" class="headerlink" title="实现事件监听"></a>实现事件监听</h2><p>事实上实现事件监听的本质就是保存指定事件的监听处理函数。这里需要保存不同的事件的处理函数，然后监听相同的事件的处理函数都放在同一个数组中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">on: function (eventName, callback) &#123;</span><br><span class="line">  var handlers = this.handlers;</span><br><span class="line"></span><br><span class="line">  // 判断是否有相关事件的监听者，如果没有则创建</span><br><span class="line">  if (!handlers[eventName]) &#123;</span><br><span class="line">    handlers[eventName] = [];</span><br><span class="line">  &#125;</span><br><span class="line">  // 增加指定事件的监听者</span><br><span class="line">  handlers[eventName].push(callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="实现事件触发"><a href="#实现事件触发" class="headerlink" title="实现事件触发"></a>实现事件触发</h2><p>事实上实现事件触发相对来说比较简单，我们只需要先获取到指定事件的相关监听处理函数，并循环一一调用即可。如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * 触发指定事件</span><br><span class="line">  * @param eventName &#123;string&#125; 事件名称</span><br><span class="line">  */</span><br><span class="line">emit: function (eventName) &#123;</span><br><span class="line">  var eventHandlers = this.handlers[eventName];</span><br><span class="line">  // 循环调用相关观察者处理函数</span><br><span class="line">  if(eventHandlers)&#123;</span><br><span class="line">    for(var i = 0, len = eventHandlers.length; i &lt; len; i++) &#123;</span><br><span class="line">      var handler = eventHandlers[i];</span><br><span class="line">      // 调用</span><br><span class="line">      handler(eventName);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因此最终参考答案如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">var Event = &#123;</span><br><span class="line">  handlers: &#123;&#125;,</span><br><span class="line">  /**</span><br><span class="line">   * 监听指定函数</span><br><span class="line">   * @param eventName &#123;string&#125; 事件名称</span><br><span class="line">   * @param callback &#123;function&#125; 处理函数</span><br><span class="line">   */</span><br><span class="line">  on: function (eventName, callback) &#123;</span><br><span class="line">    var handlers = this.handlers;</span><br><span class="line"></span><br><span class="line">    // 判断是否有相关事件的监听者，如果没有则创建</span><br><span class="line">    if (!handlers[eventName]) &#123;</span><br><span class="line">      handlers[eventName] = [];</span><br><span class="line">    &#125;</span><br><span class="line">    // 增加指定事件的监听者</span><br><span class="line">    handlers[eventName].push(callback);</span><br><span class="line">  &#125;,</span><br><span class="line">  /**</span><br><span class="line">   * 触发指定事件</span><br><span class="line">   * @param eventName &#123;string&#125; 事件名称</span><br><span class="line">   */</span><br><span class="line">  emit: function (eventName) &#123;</span><br><span class="line">    var eventHandlers = this.handlers[eventName];</span><br><span class="line">    // 循环调用相关观察者处理函数</span><br><span class="line">    if(eventHandlers)&#123;</span><br><span class="line">      for(var i = 0, len = eventHandlers.length; i &lt; len; i++) &#123;</span><br><span class="line">        var handler = eventHandlers[i];</span><br><span class="line">        // 调用</span><br><span class="line">        handler(eventName);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>我们这里实现的 Event 对象是比较简单的。事实上，业务使用的 Event 对象拥有更多健壮性和强大的功能代码，大家可以尝试地去实现下面的功能：</p>
+<p>去除事件监听 remove<br>通过 return false 或者其他中断后续处理函数的执行</p>
+<h1 id="MVC模式"><a href="#MVC模式" class="headerlink" title="MVC模式"></a>MVC模式</h1><p><img src="/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/mvc.png" alt="mvc.png"></p>
+<h1 id="MVVM模式"><a href="#MVVM模式" class="headerlink" title="MVVM模式"></a>MVVM模式</h1><p><img src="/2019/01/28/前端知识归纳（7）-JS应用开发（part3-设计模式）/mvvm.png" alt="mvvm.png"></p>
+<h1 id="数据双向绑定的常见实现原理"><a href="#数据双向绑定的常见实现原理" class="headerlink" title="数据双向绑定的常见实现原理"></a>数据双向绑定的常见实现原理</h1><p>前面讲到的 MVVM 框架，其主要亮点就是实现了视图层和数据层的 <strong>双向绑定(two-way-binding)</strong>。那么双向绑定在前端中是如何实现的呢？在本文中，将给大家讲解数据双向绑定的常见实现方式。</p>
+<h2 id="观察者模式实现"><a href="#观察者模式实现" class="headerlink" title="观察者模式实现"></a>观察者模式实现</h2><p>前面我们学习了什么是<strong>观察者模式</strong>。观察者模式可以来实现我们的数据的双向绑定。只不过这种方式需要我们手动地去调用获取和设置数据的指定方法（如 <code>updateData</code> 等）。在数据发生变化的时候，我们发布一个叫<strong>数据变化</strong>的的事件。同理，当视图发生变化的时候，我们发布一个叫<strong>视图变化</strong>的事件。在这些事件发生时只要让相关的观察者去订阅这些事件即可。</p>
+<p>如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 更新数据 </span><br><span class="line">var data = &#123;&#125;;</span><br><span class="line">function updateData(attr, value)&#123;</span><br><span class="line">   data[attr] = value;</span><br><span class="line">   Event.trigger(&apos;数据变化&apos;, attr, value);</span><br><span class="line">&#125;</span><br><span class="line">// 订阅视图变化事件 </span><br><span class="line">Event.on(&apos;视图变化&apos;, function(attr, value)&#123;</span><br><span class="line">  // 更新数据</span><br><span class="line">  updateData(attr, value);</span><br><span class="line">&#125;);</span><br><span class="line">// 订阅数据变化事件 </span><br><span class="line">Event.on(&apos;数据变化&apos;, function(attr, value)&#123;</span><br><span class="line">   // 更新绑定的视图</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//用户操作，发布视图变化事件   </span><br><span class="line">document.body.addEventListener(&apos;keyup&apos;, function( e )&#123;</span><br><span class="line">   Event.trigger(&apos;视图变化&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><em>这种方式，是最早期的方式，问题是需要<strong>手动的方式来绑定关系</strong>，对于那种多交互和数据修改的页面就比较繁琐。</em></p>
+<h2 id="脏检测-Dirty-Checking-实现"><a href="#脏检测-Dirty-Checking-实现" class="headerlink" title="脏检测 (Dirty Checking)实现"></a>脏检测 (Dirty Checking)实现</h2><p>典型的 angularJS 的数据双向绑定就是基于数据的脏检测机制来实现的。angularJS 通过检查脏数据来进行 UI 层的操作更新，以下是相关点：大体原理是通过记录所有变量的当前值，然后当发生特定的操作之后，angularJS 会调用 <code>$digest</code> 方法，这个方法内部做的逻辑就是遍历所有的 <code>watcher(观察者)</code>，对被监控的属性做对比，对比其在方法调用前后属性值有没有发生变化，如果发生变化，则调用对应的 <code>handler</code> (处理函数)。</p>
+<h3 id="触发脏检测的操作"><a href="#触发脏检测的操作" class="headerlink" title="触发脏检测的操作"></a>触发脏检测的操作</h3><ul>
+<li>DOM事件，譬如用户输入文本，点击按钮(ng-click)等</li>
+<li>XHR响应事件 ($http)</li>
+<li>浏览器Location变更事件 ($location)</li>
+<li>Timer事件($timeout, $interval)</li>
+<li>执行 $digest() 或 $apply()</li>
+</ul>
+<p>如果大家感兴趣 angularJS 双向数据绑定的具体实现，可以阅读下面的一些文章：</p>
+<ul>
+<li><a href="http://www.html-js.com/article/2145" target="_blank" rel="noopener">AngularJS数据双向绑定揭秘</a></li>
+<li><a href="https://www.zhihu.com/question/23275373" target="_blank" rel="noopener">AngularJS的数据双向绑定是怎么实现的？</a></li>
+</ul>
+<p><em>脏检测方式的缺点十分明显，就是<strong>遍历 watcher 是很消耗性能</strong>的，特别是当监控数量达到一个数量级的时候。</em></p>
+<h2 id="数据劫持-Hijacking-实现"><a href="#数据劫持-Hijacking-实现" class="headerlink" title="数据劫持(Hijacking)实现"></a>数据劫持(Hijacking)实现</h2><p>事实上，目前许多 MVVM 框架（vue.js、avalon.js 等）都是使用这种技术实现，数据劫持的核心是通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty()</a>来实现。我们可以使用 <code>Object.defineProperty()</code> 来定义一个对象的属性情况，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(obj, key,&#123;</span><br><span class="line">    value: someValue ,</span><br><span class="line">    writable: true, // 可写</span><br><span class="line">    enumerable: true, // 可被赋值</span><br><span class="line">    configurable: true // 可改变和删除</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>除了上面之外，我们还可以设置属性的 <code>getter</code>，<code>setter</code>。当存在 <code>getter</code>，<code>setter</code> 函数时，会出现下面的情况：</p>
+<ul>
+<li>当获取目标属性时触发 <code>getter</code> 函数的执行</li>
+<li>当对目标属性进行赋值操作时会触发 <code>setter</code>函数的执行</li>
+</ul>
+<p>根据我们行业的术语，这种方式称为 <strong>数据劫持</strong>。通过使用 <strong>数据劫持</strong>，我们可以这样实现双向绑定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个设置属性 setter 和 getter 的方法</span><br><span class="line">function defineProperty(obj, attr, value)&#123;</span><br><span class="line">  // 私有变量 value</span><br><span class="line">  var value;</span><br><span class="line"></span><br><span class="line">  Object.defineProperty(obj, attr, &#123;</span><br><span class="line">    get:function ()&#123;</span><br><span class="line">      console.log(&apos;获取属性值&apos; + value);</span><br><span class="line">      return value;</span><br><span class="line">    &#125;,</span><br><span class="line">    set:function (val)&#123;</span><br><span class="line">      console.log(&apos;修改属性值为 &apos; + value); </span><br><span class="line">      value = val;</span><br><span class="line">      console.log(&apos;修改属性值&apos;); </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  // 设置属性值</span><br><span class="line">  obj[attr] = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 通过使用 defineProperty 方法，设置 man 的 name 属性的数据变化监听</span><br><span class="line">var man = &#123;&#125;;</span><br><span class="line">defineProperty(man, &apos;name&apos;, &quot;cover&quot;); // 修改属性值为 cover</span><br><span class="line">man.name; // 获取属性值 cover</span><br><span class="line">man.name = &apos;kevin&apos;; // 修改属性值为 kevin</span><br></pre></td></tr></table></figure>
+<p>通过 <code>Object.defineProperty()</code> ，我们可以轻松地得知数据（对象）发生变化，然后在相应的 <code>setter</code> 函数中设置数据更新相应的操作（如发布更新事件）。通过这种方式我们可以使用赋值操作 <code>=</code> 来实现数据绑定，相对前面通过手动调用绑定指定更新数据接口 <code>updateData</code> 来说更加优雅。</p>
+<p><em>注：比较主流的方法，针对部分还不支持 <code>Object.defineProperty</code> 低级浏览器，可采用 <code>VBScript</code> 作了完美兼容。当然大部分 mvvm 框架已经逐渐放弃对低端浏览器的支持。</em></p>
+<h2 id="更多阅读-1"><a href="#更多阅读-1" class="headerlink" title="更多阅读"></a>更多阅读</h2><ul>
+<li><a href="http://jixianqianduan.com/frontend-javascript/2015/11/29/js-data-two-ways-binding.html" target="_blank" rel="noopener">javascript实现数据双向绑定的三种方式</a></li>
+<li><a href="https://div.io/topic/600" target="_blank" rel="noopener">Object.observe()带来的数据绑定变革</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part2-Ajax）/" rel="next" title="前端知识归纳（7）-- JS应用开发（part2 Ajax）">
+                <i class="fa fa-chevron-left"></i> 前端知识归纳（7）-- JS应用开发（part2 Ajax）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/" rel="prev" title="前端知识归纳（7）-- JS应用开发（part4 React）">
+                前端知识归纳（7）-- JS应用开发（part4 React） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sponge</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#适配器模式"><span class="nav-number">2.</span> <span class="nav-text">适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">2.1.</span> <span class="nav-text">适配器模式的使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#装饰器模式"><span class="nav-number">3.</span> <span class="nav-text">装饰器模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES7-的-Decorator"><span class="nav-number">4.</span> <span class="nav-text">ES7 的 Decorator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用"><span class="nav-number">4.1.</span> <span class="nav-text">如何使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过使用-Babel-来转换使用"><span class="nav-number">4.1.1.</span> <span class="nav-text">通过使用 Babel 来转换使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-在线的-REPL-提前体验"><span class="nav-number">4.1.2.</span> <span class="nav-text">通过 在线的 REPL 提前体验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-的-Decorator"><span class="nav-number">4.2.</span> <span class="nav-text">JavaScript 的 Decorator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰类"><span class="nav-number">4.3.</span> <span class="nav-text">装饰类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰类的方法"><span class="nav-number">4.4.</span> <span class="nav-text">装饰类的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多层装饰器"><span class="nav-number">4.5.</span> <span class="nav-text">多层装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多参数"><span class="nav-number">4.6.</span> <span class="nav-text">更多参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不能装饰普通函数"><span class="nav-number">4.6.1.</span> <span class="nav-text">不能装饰普通函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">4.7.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读"><span class="nav-number">4.8.</span> <span class="nav-text">更多阅读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#观察者模式"><span class="nav-number">5.</span> <span class="nav-text">观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现事件监听"><span class="nav-number">5.1.</span> <span class="nav-text">实现事件监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现事件触发"><span class="nav-number">5.2.</span> <span class="nav-text">实现事件触发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">5.3.</span> <span class="nav-text">拓展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC模式"><span class="nav-number">6.</span> <span class="nav-text">MVC模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVVM模式"><span class="nav-number">7.</span> <span class="nav-text">MVVM模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据双向绑定的常见实现原理"><span class="nav-number">8.</span> <span class="nav-text">数据双向绑定的常见实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式实现"><span class="nav-number">8.1.</span> <span class="nav-text">观察者模式实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脏检测-Dirty-Checking-实现"><span class="nav-number">8.2.</span> <span class="nav-text">脏检测 (Dirty Checking)实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发脏检测的操作"><span class="nav-number">8.2.1.</span> <span class="nav-text">触发脏检测的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据劫持-Hijacking-实现"><span class="nav-number">8.3.</span> <span class="nav-text">数据劫持(Hijacking)实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读-1"><span class="nav-number">8.4.</span> <span class="nav-text">更多阅读</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sponge</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">65.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JAytK8dtYmfQUns7Dd8iG9zC-gzGzoHsz',
+        appKey: 'Y3ImYMhiFYr5d6sIuyK3ej0Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

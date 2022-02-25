@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="XSS(Cross Site Script)跨站脚本攻击  反射型 诱导用户点击恶意链接来造成一次性攻击 反射型 XSS，也可称为非持久型 XSS。 其攻击方式往往是通过诱导用户去点击一些带有恶意脚本参数的 URL而发起的。 事实上由于反射型 XSS 因为 url 特征导致很容易被防御。很多浏览器如 Chrome 都内置了 相应的 XSS 过滤器，来防范用户点击了反射型 XSS 的恶意链接 反射型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识归纳（8）-- 安全攻防战">
+<meta property="og:url" content="http://yoursite.com/2019/01/28/前端知识归纳（8）-安全攻防战/index.html">
+<meta property="og:site_name" content="Sponge的个人博客">
+<meta property="og:description" content="XSS(Cross Site Script)跨站脚本攻击  反射型 诱导用户点击恶意链接来造成一次性攻击 反射型 XSS，也可称为非持久型 XSS。 其攻击方式往往是通过诱导用户去点击一些带有恶意脚本参数的 URL而发起的。 事实上由于反射型 XSS 因为 url 特征导致很容易被防御。很多浏览器如 Chrome 都内置了 相应的 XSS 过滤器，来防范用户点击了反射型 XSS 的恶意链接 反射型">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-20T08:09:01.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识归纳（8）-- 安全攻防战">
+<meta name="twitter:description" content="XSS(Cross Site Script)跨站脚本攻击  反射型 诱导用户点击恶意链接来造成一次性攻击 反射型 XSS，也可称为非持久型 XSS。 其攻击方式往往是通过诱导用户去点击一些带有恶意脚本参数的 URL而发起的。 事实上由于反射型 XSS 因为 url 特征导致很容易被防御。很多浏览器如 Chrome 都内置了 相应的 XSS 过滤器，来防范用户点击了反射型 XSS 的恶意链接 反射型">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/28/前端知识归纳（8）-安全攻防战/">
+
+
+
+
+
+  <title>前端知识归纳（8）-- 安全攻防战 | Sponge的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sponge的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/前端知识归纳（8）-安全攻防战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端知识归纳（8）-- 安全攻防战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T11:42:23+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/28/前端知识归纳（8）-安全攻防战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/28/前端知识归纳（8）-安全攻防战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="XSS-Cross-Site-Script"><a href="#XSS-Cross-Site-Script" class="headerlink" title="XSS(Cross Site Script)"></a>XSS(Cross Site Script)</h1><p>跨站脚本攻击</p>
+<ul>
+<li>反射型 诱导用户点击恶意链接来造成一次性攻击<ul>
+<li>反射型 XSS，也可称为非持久型 XSS。</li>
+<li>其攻击方式往往是通过诱导用户去点击一些带有恶意脚本参数的 URL而发起的。</li>
+<li>事实上由于反射型 XSS 因为 url 特征导致很容易被防御。很多浏览器如 Chrome 都内置了 相应的 XSS 过滤器，来防范用户点击了反射型 XSS 的恶意链接</li>
+<li>反射型 XSS 归根到底就是由于不可信的用户输入被服务器在没有安全防范处理，然后就直接使用到响应页面中，然后反射给用户而导致代码在浏览器执行的一种 XSS 漏洞。</li>
+</ul>
+</li>
+<li>存储型 恶意代码存储到漏洞服务器中，用户浏览相关页面发起攻击。<ul>
+<li>持久型 XSS 其实就是由于不可信的用户输入在没有任何验证的情况下保存在服务端的文件或者数据库中，并且取出不可信的数据时也没有做相关安全处理就返回响应，导致了存储的恶意脚本数据在浏览器中执行的一种 XSS 漏洞。  <h2 id="xss防御"><a href="#xss防御" class="headerlink" title="xss防御"></a>xss防御</h2></li>
+<li>httpOnly</li>
+<li>输入检查</li>
+<li>输出检查<h3 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h3><h4 id="实现函数-filter"><a href="#实现函数-filter" class="headerlink" title="实现函数 filter"></a>实现函数 filter</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 正则获取危险标签</span><br><span class="line">var REGEXP_TAG = /&lt;(script|style|iframe)[^&lt;&gt;]*?&gt;.*?&lt;\/\1&gt;/ig;</span><br><span class="line">// 正则获取危险标签属性</span><br><span class="line">var REGEXP_ATTR_NAME = /(onerror|onclick)=([\&quot;\&apos;]?)([^\&quot;\&apos;&gt;]*?)\2/ig;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 过滤函数</span><br><span class="line"> * @param &#123;String&#125; str</span><br><span class="line"> */</span><br><span class="line">function filter(str) &#123;</span><br><span class="line">  return String(str)</span><br><span class="line">    .replace(REGEXP_TAG, &apos;&apos;)</span><br><span class="line">    .replace(REGEXP_ATTR_NAME, &apos;&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>注：这里说明下，事实上富文本更倾向于使用白名单的形式(只可以使用指定的标签和属性)来实现输入检查。</p>
+<h4 id="实现-htmlEncode"><a href="#实现-htmlEncode" class="headerlink" title="实现 htmlEncode"></a>实现 htmlEncode</h4><p>htmlEncode 逻辑比较简单，通常来说只需要过滤几个重要字符即可，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 转义 HTML 特殊字符</span><br><span class="line"> * @param &#123;String&#125; str</span><br><span class="line"> */</span><br><span class="line">function htmlEncode(str) &#123;</span><br><span class="line">  return String(str)</span><br><span class="line">    .replace(/&amp;/g, &apos;&amp;amp;&apos;)</span><br><span class="line">    .replace(/&quot;/g, &apos;&amp;quot;&apos;)</span><br><span class="line">    .replace(/&apos;/g, &apos;&amp;#39;&apos;)</span><br><span class="line">    .replace(/&lt;/g, &apos;&amp;lt;&apos;)</span><br><span class="line">    .replace(/&gt;/g, &apos;&amp;gt;&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>在真实的业务开发中，输入检查所做的工作更为全面和复杂。目前有许多十分完善通用的 XSS 防范的代码库，大家可以结合理解去阅读和试用下：</p>
+<ul>
+<li><a href="https://github.com/ESAPI/node-esapi/blob/master/lib/esapi.js" target="_blank" rel="noopener">node-esapi</a></li>
+<li><a href="https://github.com/leizongmin/js-xss" target="_blank" rel="noopener">js-xss</a></li>
+</ul>
+<h1 id="Web-相关编码和转义"><a href="#Web-相关编码和转义" class="headerlink" title="Web 相关编码和转义"></a>Web 相关编码和转义</h1><p>提到 Web 前端安全，第一个想到的就是 XSS。<br>而提到 XSS，不得不说的就是编码了。事实上，编码涉及的知识十分的复杂，很难短时间梳理清楚和弄明白。在这里只要求大家对编码有一个概念就好，日后再进行深究。</p>
+<h2 id="常用编码"><a href="#常用编码" class="headerlink" title="常用编码"></a>常用编码</h2><p>本文从 XSS 中常用的编码讲起，分为</p>
+<ul>
+<li><strong>URL 编码</strong></li>
+<li><strong>HTML 编码</strong></li>
+<li><strong>JS 编码</strong></li>
+</ul>
+<h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><p>一般来说，URL只能使用英文字母（<code>a-zA-Z</code>）、数字（<code>0-9</code>）、<code>-_.~</code>4个特殊字符以及所有（<code>;,/?:@&amp;=+$#</code>）保留字符。</p>
+<p>意味着如果使用了一些其他文字和特殊字符，则需要通过编码的方式来进行表示，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 使用了汉字</span><br><span class="line">var url1 = &apos;http://www.帅.com&apos;;</span><br></pre></td></tr></table></figure>
+<p>另外我们知道在 URL 中传参是通过<strong>键值对</strong>形式进行的，格式上是以<code>？</code>、<code>&amp;</code> 和 <code>=</code> 为特征标识进行解析，如果在键或者值的内容中包含一些特殊符号，就会造成解析错误，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 键为汉字</span><br><span class="line">var url2 = &apos;http://www.a.com?我=1&apos;;</span><br><span class="line">// 值的内容为特殊符号</span><br><span class="line">var url3 = &apos;http://a.com?key=?&amp;&apos;;</span><br></pre></td></tr></table></figure>
+<p>对于上面的情况如果我们要正常解析，则需要进行编码，需要用不会造成歧义的符号代替有歧义的符号。</p>
+<p>我们可以通过使用系统原生实现的 API 来对字符进行 <strong>URL 编码</strong>如:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI" target="_blank" rel="noopener">encodeURI()</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" target="_blank" rel="noopener">encodeURIComponent()</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/escape" target="_blank" rel="noopener">escape 逐渐废弃可以不理会</a></li>
+</ul>
+<h3 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI"></a>encodeURI</h3><p><strong>encodeURI</strong> 是用来编码 URI 的，最常见的就是编码一个 URL。<strong>encodeURI</strong> 会将需要编码的字符转换为 <code>UTF-8</code> 的格式。对于保留字符（<code>;,/?:@&amp;=+$#</code>），以及非转义字符（字母数字以及 <code>-_.!~*&#39;()</code>）不会进行转义。</p>
+<p>例如之前 URL 中包含中文，我们可以使用 encodeURI：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encodeURI(&apos;http://www.帅.com&apos;); // http://www.%E5%B8%85.com</span><br><span class="line">encodeURI(&apos;http://www.a.com?我=1&apos;);// &quot;http://www.a.com?%E6%88%91=1&quot;</span><br></pre></td></tr></table></figure>
+<p>在这里，<code>%E5%B8%85</code> 就是 <code>帅</code> 的 URL 编码，<code>%E6%88%91</code> 即为 <code>我</code> 的 URL 编码。然后由于 <strong>encodeURI</strong> 不转义<code>&amp;</code>、<code>?</code>和<code>=</code>。所以对于 URL 参数的值是无法转义的，如下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 值的内容为特殊符号</span><br><span class="line">encodeURI(&apos;http://a.com?key=?&amp;&apos;); // &quot;http://a.com?key=?&amp;&quot;</span><br></pre></td></tr></table></figure>
+<p>此时我们就需要使用 <strong>encodeURIComponent</strong> 来解决。</p>
+<h3 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent"></a>encodeURIComponent</h3><p>顾名思义，<strong>encodeURIComponent</strong> 是用来编码 URI 参数的。它会跳过非转义字符（字母数字以及<code>-_.!~*&#39;()</code>）。但会转义 URL的 保留字符（<code>;,/?:@&amp;=+$#</code>）。通常来说我们会 <strong>encodeURI</strong> 结合 <strong>encodeURIComponent</strong> 来使用，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// &quot;http://a.com?a=%3F%26&quot;</span><br><span class="line">encodeURI(&apos;http://a.com&apos;) + &apos;?a=&apos; + encodeURIComponent(&apos;?&amp;&apos;);</span><br></pre></td></tr></table></figure>
+<p>其中 <code>%3F</code> 和 <code>%26</code> 分别为 <code>?</code> 和 <code>&amp;</code> 的 URL 编码。需注意的是由于 <strong>encodeURIComponent</strong> 会编码所有的 URL 保留字，所以不适合编码 URL，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// &quot;http%3A%2F%2Fa.com%3Fkey%3D%3F%26&quot;</span><br><span class="line">encodeURIComponent(&apos;http://a.com?key=?&amp;&apos;);</span><br></pre></td></tr></table></figure>
+<p>上面的 <code>http%3A%2F%2Fa.com%3Fkey%3D%3F%26</code> 在地址栏会被解析为一个普通的字符串而不是 URL。</p>
+<h2 id="URL-解码"><a href="#URL-解码" class="headerlink" title="URL 解码"></a>URL 解码</h2><p>有了 URL 编码，相应的会有解码机制。比如上面对应的 3个 encode 的API对应的解码 API 如下：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/decodeURI" target="_blank" rel="noopener">decodeURI()</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent" target="_blank" rel="noopener">decodeURIComponent()</a></li>
+</ul>
+<h2 id="HTML-编码"><a href="#HTML-编码" class="headerlink" title="HTML 编码"></a>HTML 编码</h2><p>在 HTML 中，某些字符是预留的，比如不能使用小于号（<code>&lt;</code>）和大于号（<code>&gt;</code>），这是因为浏览器会误认为它们是标签。如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体（character entities）。当然还另一个重要原因，有些字符在 ASCII 字符集中没有定义，因此需要使用字符实体来表示，比如中文。</p>
+<p>HTML 编码分为：</p>
+<ul>
+<li>HTML 十六进制编码 <code>&amp;#xH;</code></li>
+<li>HTML 十进制编码 <code>&amp;#D;</code></li>
+<li>HTML 实体编码 <code>&amp;lt;</code> 等</li>
+</ul>
+<p>在 HTML 进制编码中其中的数字则是对应字符的 unicode 字符编码。<br>比如单引号的 unicode 字符编码是27，则单引号可以被编码为<code>&amp;#x27;</code></p>
+<h3 id="HTML-实体编码"><a href="#HTML-实体编码" class="headerlink" title="HTML 实体编码"></a>HTML 实体编码</h3><p>通常来说，在业务中我们用到更多的是 HTML 的实体编码。常用的 HTML 实体编码函数如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 转义 HTML 特殊字符</span><br><span class="line"> * @param &#123;String&#125; str</span><br><span class="line"> */</span><br><span class="line">function htmlEncode(str) &#123;</span><br><span class="line">  return String(str)</span><br><span class="line">    .replace(/&amp;/g, &apos;&amp;amp;&apos;)</span><br><span class="line">    .replace(/&quot;/g, &apos;&amp;quot;&apos;)</span><br><span class="line">    .replace(/&apos;/g, &apos;&amp;#39;&apos;)</span><br><span class="line">    .replace(/&lt;/g, &apos;&amp;lt;&apos;)</span><br><span class="line">    .replace(/&gt;/g, &apos;&amp;gt;&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更完整的转义列表见<a href="http://w3school.com.cn/html/html_entities.asp" target="_blank" rel="noopener">这里</a>。</p>
+<h2 id="Javascript-转义"><a href="#Javascript-转义" class="headerlink" title="Javascript 转义"></a>Javascript 转义</h2><p>JavaScript 中有些字符有特殊用途，如果字符串中想使用这些字符原来的含义，需要使用反斜杠对这些特殊符号进行<a href="http://www.w3school.com.cn/js/js_special_characters.asp" target="_blank" rel="noopener">转义</a>。我们称之为 <strong>Javascript编码</strong>。一般有以下几类：</p>
+<ul>
+<li>三个八进制数字，如果不够个数，前面补0，例如 “e” 编码为“\145”</li>
+<li>两个十六进制数字，如果不够个数，前面补0，例如 “e” 编码为“\x65”</li>
+<li>四个十六进制数字，如果不够个数，前面补0，例如 “e” 编码为“\u0065”</li>
+<li>对于一些控制字符，使用特殊的C类型的转义风格（例如\n和\r）</li>
+</ul>
+<p>如下面所示，双引号用于标注字符串，然而在字符串中带了双引号，就会发生歧义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &quot;Hello&quot;&quot;;</span><br></pre></td></tr></table></figure>
+<p>于是我们需要对字符串内的双引号进行转义，也就是加上反斜杠，告诉脚本引擎要区分对待：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &quot;Hello\&quot;&quot;;</span><br></pre></td></tr></table></figure>
+<h2 id="更多阅读"><a href="#更多阅读" class="headerlink" title="更多阅读"></a>更多阅读</h2><p>对 Web 相关编码和转义十分感兴趣的同学可以阅读下面的文章和内容来加深理解。</p>
+<ul>
+<li><a href="https://github.com/FrankFang/githublog/blob/master/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E7%9A%84%E5%90%84%E7%A7%8D%E8%BD%AC%E4%B9%89.md" target="_blank" rel="noopener">前端的各种转义</a></li>
+<li><a href="http://imweb.io/topic/57024e4606f2400432c1396d" target="_blank" rel="noopener">从零开始学web安全（3）</a></li>
+</ul>
+<h1 id="CSRF-Cross-site-request-forgery"><a href="#CSRF-Cross-site-request-forgery" class="headerlink" title="CSRF(Cross-site request forgery)"></a>CSRF(Cross-site request forgery)</h1><p>跨站请求伪造</p>
+<h2 id="csrf防御"><a href="#csrf防御" class="headerlink" title="csrf防御"></a>csrf防御</h2><ul>
+<li>验证码 针对伪造请求一般是用户不知情情况下发出的，我们一般会在关键操作增加验证码</li>
+<li>reference验证 针对伪造请求一般是从别的网站发出的，可以通过验证请求的 referer 来防御</li>
+<li>token验证 伪造请求可以成功的最主要还是因为我们的参数是可预测的，攻击者可以通过分析我们的请求，伪造相应的参数进行攻击，所以我们最好最常用的方式还是让每个请求都带上服务器返回的，不可预测的参数，这也就是我们说的 anti CSRF token。</li>
+</ul>
+<h1 id="DDOS防范"><a href="#DDOS防范" class="headerlink" title="DDOS防范"></a>DDOS防范</h1><p>在许多黑客题材的电视剧电影中，我们可以看到 <strong>DDOS (分布式拒绝服务) 攻击</strong>经常出现。DDOS 出镜率之所以高是因为其易攻难守。十多年过去了，DDOS 攻击仍是业界安全问题中一个难题，当攻击流量超过了服务的网络设备的极限或带宽的最大负荷时，网站服务将瘫痪导致无法正常运作。</p>
+<p>通常来说，对于 DDOS 攻击我们可以通过下面的方式来进行防范。</p>
+<h2 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h2><p>验证码是我们在互联网十分常见的技术之一。不得不说验证码是能够有效地防止多次重复请求的行为。目前来说，随着验证码方式的丰富化，导致黑客们没有一个比较有效的方式来获取和识别验证码。但由于验证码会影响到用户体验，因此验证码只有在比较重要的入口才会使用，如转账和登陆的场景。</p>
+<h2 id="限制请求频率（ratelimit）"><a href="#限制请求频率（ratelimit）" class="headerlink" title="限制请求频率（ratelimit）"></a>限制请求频率（ratelimit）</h2><p><strong>限制请求频率</strong>是我们最常见的针对 DDOS 攻击的防御措施。其原理为设置每个<strong>客户端</strong>的请求频率的限制。简单来说，就是通过一些标识（如 IP 与 Cookie）来定位一个客户端，如果该客户端的请求在一定时间内过于频繁。则对该客户端之后的请求都重定向到一个出错的页面或者封杀相关 IP。</p>
+<p>当然许多框架都会有相应地限制请求频率的工具包，如 <code>koa</code> 框架便可以使用下面这些：</p>
+<ul>
+<li><a href="https://github.com/cnpm/koa-limit" target="_blank" rel="noopener">koa-limit</a></li>
+<li><a href="https://github.com/koajs/ratelimit" target="_blank" rel="noopener">koa-ratelimit</a></li>
+</ul>
+<h2 id="扩容加带宽"><a href="#扩容加带宽" class="headerlink" title="扩容加带宽"></a>扩容加带宽</h2><p>简单来说就是，增加机器增加服务带宽。只要超过了攻击流量便可以避免服务瘫痪。在<strong>双十一活动</strong>或者<strong>12306 抢车票</strong>等场景时，网站服务都会对自己的机器进行扩容和提高带宽。然而为了避免由于使用过多机器导致成本太高且浪费的情况。通常来说都是根据网站活动和请求情况来实施相应扩容操作。</p>
+<h2 id="其他的方法"><a href="#其他的方法" class="headerlink" title="其他的方法"></a>其他的方法</h2><p>事实上还有许多其他的方法，根据不同情况都有相应的效果</p>
+<ul>
+<li>设置自己的业务为分布式服务，防止单点失效</li>
+<li>使用主流云系统和 CDN（云和 CDN 其自身有 DDOS 的防范作用）</li>
+<li>优化资源使用提高 web server 的负载能力</li>
+</ul>
+<h2 id="更多阅读-1"><a href="#更多阅读-1" class="headerlink" title="更多阅读"></a>更多阅读</h2><p>网上有许多 DDOS 的帖子，大家感兴趣可以阅读下：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/19581905" target="_blank" rel="noopener">互联网创业公司如何防御 DDOS 攻击？</a></li>
+<li><a href="https://www.leiphone.com/news/201509/9zGlIDvLhwguqOtg.html" target="_blank" rel="noopener">漫画告诉你什么是DDoS攻击？</a></li>
+</ul>
+<h1 id="更多安全内容"><a href="#更多安全内容" class="headerlink" title="更多安全内容"></a>更多安全内容</h1><p>在本章，我们讲了 XSS，CSRF 攻击和防御，还有介绍 DDOS，HTTPS 相关内容，相信大家对 Web 安全已经有了初步的认识了。当然，我们这里介绍主要是比较常见的而且是偏前端的 Web 安全知识，实际上 Web 安全很多其他方面，因为内容限制我们在课程就不给大家一一展开，感兴趣的可以根据下面的指引继续了解。</p>
+<h2 id="点击劫持"><a href="#点击劫持" class="headerlink" title="点击劫持"></a>点击劫持</h2><p>点击劫持实际上就是在正常界面上覆盖一层透明的内容，引导用户在不知情的情况下进行了某些操作，这些操作可能是广告点击，或者是开启摄像头等操作，甚至可能会导致一些数据别窃取，也有可能结合 XSS 和 CSRF 进行更负责的攻击。</p>
+<h2 id="服务端安全"><a href="#服务端安全" class="headerlink" title="服务端安全"></a>服务端安全</h2><p>除了前端注意安全，后端也需要对安全进行防范，常见比如防止 SQL 注入，登录会话管理等。</p>
+<h2 id="更多阅读-2"><a href="#更多阅读-2" class="headerlink" title="更多阅读"></a>更多阅读</h2><p>身为一名前端工程师，要学会如何去保护好自己的网站。</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/251704d8ff18" target="_blank" rel="noopener">web安全之–点击劫持攻击与防御技术简介</a></li>
+<li>《白帽子讲 Web 安全》相关内容</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part4-React）/" rel="next" title="前端知识归纳（7）-- JS应用开发（part4 React）">
+                <i class="fa fa-chevron-left"></i> 前端知识归纳（7）-- JS应用开发（part4 React）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/23/Vuex/" rel="prev" title="Vuex">
+                Vuex <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sponge</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-Cross-Site-Script"><span class="nav-number">1.</span> <span class="nav-text">XSS(Cross Site Script)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xss防御"><span class="nav-number">1.1.</span> <span class="nav-text">xss防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入检查"><span class="nav-number">1.1.1.</span> <span class="nav-text">输入检查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现函数-filter"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">实现函数 filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-htmlEncode"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">实现 htmlEncode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓展"><span class="nav-number">1.1.2.</span> <span class="nav-text">拓展</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-相关编码和转义"><span class="nav-number">2.</span> <span class="nav-text">Web 相关编码和转义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用编码"><span class="nav-number">2.1.</span> <span class="nav-text">常用编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL编码"><span class="nav-number">2.2.</span> <span class="nav-text">URL编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#encodeURI"><span class="nav-number">2.2.1.</span> <span class="nav-text">encodeURI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#encodeURIComponent"><span class="nav-number">2.2.2.</span> <span class="nav-text">encodeURIComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL-解码"><span class="nav-number">2.3.</span> <span class="nav-text">URL 解码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-编码"><span class="nav-number">2.4.</span> <span class="nav-text">HTML 编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-实体编码"><span class="nav-number">2.4.1.</span> <span class="nav-text">HTML 实体编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript-转义"><span class="nav-number">2.5.</span> <span class="nav-text">Javascript 转义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读"><span class="nav-number">2.6.</span> <span class="nav-text">更多阅读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF-Cross-site-request-forgery"><span class="nav-number">3.</span> <span class="nav-text">CSRF(Cross-site request forgery)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#csrf防御"><span class="nav-number">3.1.</span> <span class="nav-text">csrf防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DDOS防范"><span class="nav-number">4.</span> <span class="nav-text">DDOS防范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#验证码"><span class="nav-number">4.1.</span> <span class="nav-text">验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制请求频率（ratelimit）"><span class="nav-number">4.2.</span> <span class="nav-text">限制请求频率（ratelimit）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容加带宽"><span class="nav-number">4.3.</span> <span class="nav-text">扩容加带宽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的方法"><span class="nav-number">4.4.</span> <span class="nav-text">其他的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读-1"><span class="nav-number">4.5.</span> <span class="nav-text">更多阅读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更多安全内容"><span class="nav-number">5.</span> <span class="nav-text">更多安全内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#点击劫持"><span class="nav-number">5.1.</span> <span class="nav-text">点击劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端安全"><span class="nav-number">5.2.</span> <span class="nav-text">服务端安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多阅读-2"><span class="nav-number">5.3.</span> <span class="nav-text">更多阅读</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sponge</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">65.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JAytK8dtYmfQUns7Dd8iG9zC-gzGzoHsz',
+        appKey: 'Y3ImYMhiFYr5d6sIuyK3ej0Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
