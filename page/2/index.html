@@ -229,6 +229,379 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part2-Ajax）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/28/前端知识归纳（7）-JS应用开发（part2-Ajax）/" itemprop="url">前端知识归纳（7）-- JS应用开发（part2 Ajax）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T10:20:22+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part2-Ajax）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/28/前端知识归纳（7）-JS应用开发（part2-Ajax）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  654
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>官网的第一句话：</p>
+<blockquote>
+<p><strong>JSON</strong> (JavaScript Object Notation) is a lightweight data-interchange format.</p>
+</blockquote>
+<p>JSON 是一种轻量级的数据交换格式。JSON 是一种格式，而不是对象，所以别再说“这个 JSON 对象有问题”这种话。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; // 这是一个对象字面量，和 JSON 无关</span><br><span class="line">    &quot;hello&quot;: &quot;JSON&quot;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var b = [ // 这是一个数组字面量，和 JSON 无关</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;hello&quot;: &quot;JSON&quot;</span><br><span class="line">    &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var c = &apos;&#123;&quot;hello&quot;:&quot;JSON&quot;&#125;&apos;; // 这是一个字符串变量，和 JSON 有一点关系</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;hello&quot;:&quot;JSON&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>这才是 JSON ，JSON 就是文本，和什么语言没有关系，JS 可以解析，自然 JAVA、Python 都可以解析，所以<code>{&quot;hello&quot;:function () {}}</code>不是一个 JSON 是不是就很容易理解了，你这个 <code>function</code>放在 JAVA 里面算个什么回事？！</p>
+<p>当然，它是有格式的文本，至于什么格式，看官网 <a href="http://json.org/" target="_blank" rel="noopener">http://json.org/</a> 就好了。</p>
+<h1 id="jqXHR"><a href="#jqXHR" class="headerlink" title="jqXHR"></a>jqXHR</h1><p><strong>jqXHR</strong> 是一个对象，是 jQuery 中的 XHR 的对象，影响了一代人。</p>
+<p>你辛辛苦苦的写了下面这个代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.onreadystatechange = () =&gt; &#123;</span><br><span class="line">    if (xhr.readyState === 4) &#123;</span><br><span class="line">        // todo</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        console.log(xhr.status);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">xhr.open(&apos;get&apos;, &apos;data.json&apos;);</span><br><span class="line">xhr.send(null);</span><br></pre></td></tr></table></figure>
+<p>使用 jQuery 只用这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(&apos;data.json&apos;, function() &#123;</span><br><span class="line">    // todo</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我想没人不喜欢这样写吧，具体可以参考 <a href="http://api.jquery.com/jquery.getjson/" target="_blank" rel="noopener">http://api.jquery.com/jquery.getjson/</a> 。所以很多人认为 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">Fetch</a> 的出现就是受到 jQuery 的影响。</p>
+<p><code>$.getJSON</code> 是一个简写，jQuery 的 ajax 有更底层的接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    dataType: &apos;json&apos;,</span><br><span class="line">   url: &apos;data.json&apos;,</span><br><span class="line">   success: function() &#123;</span><br><span class="line">        // todo</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>别忘了我们的题目是 jqXHR ，所以接口什么的不多说，更详细的介绍可以参考这里：<a href="http://api.jquery.com/jQuery.ajax/" target="_blank" rel="noopener">http://api.jquery.com/jQuery.ajax/</a> 。</p>
+<p>给上面的代码赋个值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const jqXHR = $.ajax(&#123;</span><br><span class="line">    dataType: &apos;json&apos;,</span><br><span class="line">   url: &apos;data.json&apos;,</span><br><span class="line">   success: function() &#123;</span><br><span class="line">        // todo</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>没错，所有的 jQuery ajax 返回值，不管是 <code>ajax()</code> 底层还是 <code>getJSON()</code> 高阶，都是返回 jqXHR 对象。</p>
+<p>jqXHR 是原生 XHR 的封装，原生有的它都有，原生没有的，它也有。</p>
+<blockquote>
+<p>The jqXHR objects returned by <code>$.ajax()</code> as of jQuery 1.5 implement the Promise interface, giving them all the properties, methods, and behavior of a Promise.</p>
+</blockquote>
+<p>注意 <strong>Promise</strong> 字眼，Promise 是你们必须要掌握的东西，因为它是所有异步编程技术的基础，可以看看下面的参考资料。</p>
+<p>而 Promise 带给 jqXHR 的变化，就是像下面这样写代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON()</span><br><span class="line"> .done((data) =&gt; &#123; // todo &#125;)</span><br><span class="line">   .done((data) =&gt; &#123; // todo again &#125;)</span><br><span class="line">    .fail((err) =&gt; &#123; // if error &#125;)</span><br></pre></td></tr></table></figure>
+<p>这就是为什么要聊聊 <strong>jqXHR</strong> 。</p>
+<p>向 jQuery 致敬。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.gitbook.com/book/wohugb/promise/details" target="_blank" rel="noopener">JavaScript Promise迷你书（中文版）</a></li>
+<li><a href="http://api.jquery.com/jQuery.ajax/#jqXHR" target="_blank" rel="noopener">http://api.jquery.com/jQuery.ajax/#jqXHR</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/前端知识归纳（7）-JS应用开发（part1-正则表达式）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sponge">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sponge的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/28/前端知识归纳（7）-JS应用开发（part1-正则表达式）/" itemprop="url">前端知识归纳（7）-- JS应用开发（part1 正则表达式）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T09:40:49+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/28/前端知识归纳（7）-JS应用开发（part1-正则表达式）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/28/前端知识归纳（7）-JS应用开发（part1-正则表达式）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  233
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p><img src="/2019/01/28/前端知识归纳（7）-JS应用开发（part1-正则表达式）/regexp.png" alt="regexp.png"></p>
+<h2 id="flags"><a href="#flags" class="headerlink" title="flags"></a>flags</h2><ul>
+<li>i 忽略大小写</li>
+<li>g 全局查找</li>
+<li>m 多行查找<h2 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h2><img src="/2019/01/28/前端知识归纳（7）-JS应用开发（part1-正则表达式）/regexp-1.png" alt="regexp-1.png"></li>
+</ul>
+<h2 id="分组与捕获"><a href="#分组与捕获" class="headerlink" title="分组与捕获"></a>分组与捕获</h2><p><code>/(01){3}/</code>  ()代表分组<br>可以通过RexExp.exec()方法获取捕获的分组<br><code>/(?:01)/</code>非捕获型分组 即分组括号内加上?:</p>
+<h2 id="引用和反向引用"><a href="#引用和反向引用" class="headerlink" title="引用和反向引用"></a>引用和反向引用</h2><p><code>var reg = /(01){3}/.exec(&#39;20010101&#39;);</code><br><code>reg[0]</code>或者<code>reg.$1</code> 代表引用</p>
+<p><code>var reg = /&lt;(div)&gt;.*&lt;\/\1&gt;/</code><br><code>\1</code>反向引用</p>
+<h2 id="惰性匹配"><a href="#惰性匹配" class="headerlink" title="惰性匹配"></a>惰性匹配</h2><p>贪婪匹配: 普通量词<br>惰性匹配: 普通量词加?<br>例：<code>/\d+?/</code></p>
+<h2 id="正向前瞻和负向前瞻"><a href="#正向前瞻和负向前瞻" class="headerlink" title="正向前瞻和负向前瞻"></a>正向前瞻和负向前瞻</h2><p><code>/jero (?= love coding)/</code> 正向前瞻即分组括号内加?=<br><code>/jero (?! love girl)/</code> 负向前瞻即分组括号内加?!</p>
+<p><code>/(?= love coding)/</code>  匹配位置<br><code>/(?! love girl)/</code></p>
+<h2 id="String能使用正则的方法"><a href="#String能使用正则的方法" class="headerlink" title="String能使用正则的方法"></a>String能使用正则的方法</h2><ul>
+<li>replace()</li>
+<li>match()    与exec()区别，exec()捕获第一个符合分组条件的字符串，而match()则会将所有符合分组条件的子串都捕获出来</li>
+<li>split()</li>
+<li>search()</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">RegExp | MDN</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/前端知识归纳（6）-性能与工程化（part3-模块化）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2079,435 +2452,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/前端知识归纳（4）-JS基础（part4-事件）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sponge">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sponge的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/18/前端知识归纳（4）-JS基础（part4-事件）/" itemprop="url">前端知识归纳（4）-- JS基础（part4 事件）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T16:01:30+08:00">
-                2019-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/18/前端知识归纳（4）-JS基础（part4-事件）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/18/前端知识归纳（4）-JS基础（part4-事件）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h1><p><img src="/2019/01/18/前端知识归纳（4）-JS基础（part4-事件）/event.png" alt="event.png"></p>
-<h1 id="事件兼容性初探"><a href="#事件兼容性初探" class="headerlink" title="事件兼容性初探"></a>事件兼容性初探</h1><p>兼容性当然是指浏览器的兼容性，而浏览器的兼容性基本上是指 <code>IE</code>的兼容性 。是的，如果要找出最痛恨 <code>IE</code>浏览器的人，非前端工程师莫属。<code>IE</code>，不标准却用户量巨大，想不管它都不行。</p>
-<p>当然，也不用为此沮丧，<code>IE</code> 的市场份额逐年下滑，胜利终将属于前端开发！</p>
-<h2 id="几个重要的区别"><a href="#几个重要的区别" class="headerlink" title="几个重要的区别"></a>几个重要的区别</h2><h3 id="事件模型-1"><a href="#事件模型-1" class="headerlink" title="事件模型"></a>事件模型</h3><p><code>IE9</code> 之前只支持事件冒泡，不支持事件捕获，也因此事件捕获在实际开发的过程当中使用的非常少。</p>
-<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><p>IE9 之前不支持 <code>addEventListener</code> 和 <code>removeEventListener</code> ，但是有对应的方法 <code>attachEvent</code> 和 <code>detachEvent</code> ，影响也不是很大。</p>
-<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p><code>IE9</code>（不包括<code>IE9</code>） 之前的事件对象也不规范。</p>
-<p>第一个是获取对象的方式不同。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">elem.attachEvent(&apos;click&apos;, function (event) &#123;</span><br><span class="line">  // 这种绑定方式，`event` 对象可以正确拿到</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">elem.onclick = function() &#123;</span><br><span class="line">  var event = window.event; // 这种绑定方式，只能从 `window` 上拿</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第二个，事件对象几个常用的属性和方法也不标准，但有对应的属性和实现相同的效果。</p>
-<table>
-<thead>
-<tr>
-<th>标准</th>
-<th>IE</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>stopPropagation()</code></td>
-<td><code>cancelBubble</code></td>
-<td><code>cancelBubble</code>默认值为 <code>false</code> ，设为 <code>true</code> 可以取消事件冒泡。</td>
-</tr>
-<tr>
-<td><code>preventDefault()</code></td>
-<td><code>returnValue</code></td>
-<td>默认值为 <code>true</code> ，设置为 <code>false</code> 可以取消事件的默认行为。</td>
-</tr>
-<tr>
-<td><code>target</code></td>
-<td><code>srcElement</code></td>
-<td>这个好说，事件的目标元素。</td>
-</tr>
-</tbody>
-</table>
-<p>有必要说下<strong>事件的默认行为</strong>，举个例子， <code>&lt;a&gt;</code> 元素，点击就会跳转到一个新的页面，这个就是浏览器自带的<strong>事件的默认行为</strong>。</p>
-<p>有时候我们不想要这个行为，那么调用事件对象上的 <code>preventDefault()</code> 方法就能达成效果。</p>
-<h2 id="跨浏览器的事件"><a href="#跨浏览器的事件" class="headerlink" title="跨浏览器的事件"></a>跨浏览器的事件</h2><p>我们当然不能只局限于理论，而是要用于实战。</p>
-<p>我们的思路就是封装一个函数，让它的可以在所有的浏览器中正确的绑定事件，让使用者不用关注各个浏览器之间的差异，比如下面的 <code>on</code> 函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 修复事件对象不兼容的地方</span><br><span class="line"> */</span><br><span class="line">function fixEventObj(e) &#123;</span><br><span class="line">  e.target = e.target || e.srcElement;</span><br><span class="line">  e.preventDefault = e.preventDefault || function() &#123;</span><br><span class="line">    e.returnValue = false;</span><br><span class="line">  &#125;;</span><br><span class="line">  e.stopPropagation = e.stopPropagation || function() &#123;</span><br><span class="line">    e.cancelBubble = true;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 跨浏览器的绑定事件</span><br><span class="line"> */</span><br><span class="line">function on(elem, type, handle) &#123;</span><br><span class="line">  if (elem.addEventListener) &#123; // 检测是否有标准方法</span><br><span class="line">    elem.addEventListener(type, handle, false);</span><br><span class="line">  &#125; else if (elem.attachEvent) &#123; // 试图使用 `attachEvent`</span><br><span class="line">    elem.attachEvent(&apos;on&apos; + type, function(event) &#123;</span><br><span class="line">      event = fixEventObj(event);</span><br><span class="line">      handle.call(elem, event); // 使用 call 来改变 handle 的作用域，使其指向 elem</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; else &#123; // 兜底</span><br><span class="line">    elem[&apos;on&apos; + type] = function() &#123;</span><br><span class="line">      var event = fixEventObj(window.event);</span><br><span class="line">      handle.call(elem, event);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 调用</span><br><span class="line">on(document.body, &apos;click&apos;, function(e) &#123;</span><br><span class="line">  console.log(&apos;哈哈哈，好用！&apos;, e);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>这里有个实例页面，<a href="http://coding.imweb.io/demo/p4/event-cross-browser.html" target="_blank" rel="noopener">点击查看</a>。</p>
-<p>代码是次要的，思路是重点。大家可以模仿这个 <code>on</code> 写个 <code>off</code> 函数，来跨浏览器的解绑事件。</p>
-<h2 id="绑定事件的历史演进"><a href="#绑定事件的历史演进" class="headerlink" title="绑定事件的历史演进"></a>绑定事件的历史演进</h2><p>上面我们在写兼容代码的时候，涉及到 DOM0 级和 DOM2 级事件处理。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">elem.onclick = function() &#123;&#125;; // dom 属性的绑定方式就是 DOM0 级</span><br><span class="line">elem.addEventListener(); // 这种就是 DOM2 级</span><br></pre></td></tr></table></figure>
-<p>这里不含糊，推荐后一种。</p>
-<p>DOM 也有版本演进，DOM0 和 DOM2 就是不同的版本，当然，版本啥的不是我们的重点，我们想探讨的是这两者的区别。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 这种方式只能绑定一个 handle</span><br><span class="line">// 当你试图绑定第二个时，就会覆盖上一个</span><br><span class="line">elem.onclick = function() &#123;&#125;; </span><br><span class="line"></span><br><span class="line">// 这种则可绑定任意个 handle</span><br><span class="line">// 在多人开发的项目中，这个特点非常重要，不同的伙伴给同一个元素绑定事件的几率很大的</span><br><span class="line">elem.addEventListener(); // 这种就是 DOM2 级</span><br></pre></td></tr></table></figure>
-<p>好吧，事件兼容性就说到这里。</p>
-<p>兼容性问题是肯定存在的，遇到这类问题更要耐心，试着找到不同之处，写出兼容性代码，终有一天，你能写出自己的 <code>jQuery</code> ！</p>
-<h1 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h1><h2 id="鼠标类"><a href="#鼠标类" class="headerlink" title="鼠标类"></a>鼠标类</h2><ul>
-<li>click</li>
-<li>mousedown</li>
-<li>mouseup</li>
-<li>mouseenter</li>
-<li>mouseleave</li>
-<li>mouseover</li>
-<li>mouseout</li>
-<li>mousemove<h2 id="键盘类"><a href="#键盘类" class="headerlink" title="键盘类"></a>键盘类</h2></li>
-<li>keydown</li>
-<li>keypress</li>
-<li><p>keyup</p>
-<h3 id="键盘事件-keypress-和-keydown"><a href="#键盘事件-keypress-和-keydown" class="headerlink" title="键盘事件 keypress 和 keydown"></a>键盘事件 keypress 和 keydown</h3></li>
-</ul>
-<p>有个示例页面，大家试试，<a href="http://coding.imweb.io/demo/p4/event-keypress-and-keydown.html" target="_blank" rel="noopener">链接</a>。</p>
-<ul>
-<li><code>keypress</code> 按字符集触发</li>
-<li><code>keydown</code> 按所有键都会触发</li>
-</ul>
-<p>两者设计的初衷就不同。</p>
-<p><code>keypress</code> 就是用来检测用户输了啥字符的，而 <code>keydown</code> 则是单纯的检测用户是否按了键盘上的按键，所以 <code>keypress</code> 常用。</p>
-<p>两者事件对象上的 <code>keyCode</code> 值也不同。</p>
-<p><code>keyCode</code>是一个代码，与键盘上的一个键对应。在 <code>keypress</code> 事件中，这个 <code>keyCode</code> 还与 <code>ASCII</code>码对应，比如<code>keyCode</code> 等于 <code>105</code> ，就是按了 <code>i</code>。</p>
-<p>最后说下，判断一个前端专业不专业，就问下他开发界面的时候有没有考虑过键盘事件。</p>
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
-<li><a href="http://unixpapa.com/js/key.html" target="_blank" rel="noopener">JavaScript Madness: Keyboard Events</a></li>
-<li><a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="noopener">ASCII 对照表</a><h2 id="UI类事件"><a href="#UI类事件" class="headerlink" title="UI类事件"></a>UI类事件</h2><ul>
-<li>load</li>
-<li>unload</li>
-<li>resize</li>
-<li>scroll</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sponge">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sponge的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/" itemprop="url">前端知识归纳（4）-- JS基础（part3 DOM）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T13:50:01+08:00">
-                2019-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  414
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="DOM节点"><a href="#DOM节点" class="headerlink" title="DOM节点"></a>DOM节点</h1><p>html树解析成dom树<br><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-1.png" alt="dom-1.png"></p>
-<p><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-2.png" alt="dom-2.png"></p>
-<h1 id="Node接口"><a href="#Node接口" class="headerlink" title="Node接口"></a>Node接口</h1><p>使用<code>console.dir(Node)</code>可以发现，它里面定义了node对象的十二种类型<br><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-9.png" alt="dom-9.png"></p>
-<h1 id="常用节点类型"><a href="#常用节点类型" class="headerlink" title="常用节点类型"></a>常用节点类型</h1><p><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-3.png" alt="dom-3.png"></p>
-<h2 id="Document类型"><a href="#Document类型" class="headerlink" title="Document类型"></a>Document类型</h2><p>不是html元素<br>挂靠各种常用的api<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document" target="_blank" rel="noopener">Dcoument | MDN</a></p>
-<h2 id="Element类型"><a href="#Element类型" class="headerlink" title="Element类型"></a>Element类型</h2><p>html元素<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element" target="_blank" rel="noopener">Element | MDN</a></p>
-<h2 id="Text类型"><a href="#Text类型" class="headerlink" title="Text类型"></a>Text类型</h2><p>文本节点<br>常用属性data和nodeValue，两者可以混用，用于获取文本节点中的文本内容</p>
-<h2 id="DocumentFragment类型"><a href="#DocumentFragment类型" class="headerlink" title="DocumentFragment类型"></a>DocumentFragment类型</h2><p>相当于一个轻量化的document，用于存储html块，可以避免添加大量元素时导致浏览器反复渲染的问题，我们可以把需要添加的内容先添加到DocumentFragment的实例上，然后将该实例添加到指定的html元素上<br><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-6.png" alt="dom-6.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var ul = document.createElement(&apos;ul&apos;);</span><br><span class="line">var fragment = document.createDocumentFragment();</span><br><span class="line">for(let i = 1; i &lt; 101; i++) &#123;</span><br><span class="line">    var li = document.createElement(&apos;li&apos;);</span><br><span class="line">    var liText = document.createTextNode(i);</span><br><span class="line">    li.appendChild(liText);</span><br><span class="line">   //  ul.appendChild(li); 直接在ul上添加会导致浏览器反复渲染</span><br><span class="line">    fragment.appendChild(li);</span><br><span class="line">&#125;</span><br><span class="line">ul.appendChild(fragment);</span><br><span class="line">document.body.appendChild(ul);</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/DocumentFragment" target="_blank" rel="noopener">DocumentFragment | MDN</a></p>
-<h1 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h1><h2 id="DOM查找"><a href="#DOM查找" class="headerlink" title="DOM查找"></a>DOM查找</h2><p><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-4.png" alt="dom-4.png"></p>
-<h2 id="DOM新增和删除"><a href="#DOM新增和删除" class="headerlink" title="DOM新增和删除"></a>DOM新增和删除</h2><h3 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h3><ul>
-<li><code>parentNode.insertBefore(newNode, referenceNode)</code></li>
-<li><code>parentNode.appendChild(node)</code><br><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-5.png" alt="dom-5.png"><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><code>node.parentNode.removeChild(node)</code><br><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-7.png" alt="dom-7.png"></li>
-</ul>
-<h2 id="property和attribute-属性和特性"><a href="#property和attribute-属性和特性" class="headerlink" title="property和attribute(属性和特性)"></a>property和attribute(属性和特性)</h2><p><img src="/2019/01/18/前端知识归纳（4）-JS基础（part3-DOM）/dom-8.png" alt="dom-8.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// property读写</span><br><span class="line">node.className</span><br><span class="line">node.style</span><br><span class="line">node.id = &apos;property&apos;</span><br><span class="line"></span><br><span class="line">// attribute读写</span><br><span class="line">node.getAttribute(&apos;style&apos;)</span><br><span class="line">node.setAttribute(&apos;id&apos;, &apos;111&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>property只会映射到node节点，而attribute可以映射到html结构</p>
-<h2 id="修改样式"><a href="#修改样式" class="headerlink" title="修改样式"></a>修改样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">node.style.color = &apos;red&apos;;</span><br><span class="line">node.style = &apos;color: green; background-color: pink;&apos;</span><br><span class="line"></span><br><span class="line">node.className = &apos;blue&apos;;</span><br><span class="line">node.className = node.className + &apos; red&apos;;</span><br><span class="line">node.className = node.className.replace(&apos; red&apos;, &apos;&apos;);</span><br><span class="line"></span><br><span class="line">// 存在一些兼容性问题</span><br><span class="line">node.classList.add(&apos;blue&apos;);</span><br><span class="line">node.classList.remove(&apos;blue&apos;);</span><br></pre></td></tr></table></figure>
-<h2 id="修改内容"><a href="#修改内容" class="headerlink" title="修改内容"></a>修改内容</h2><ul>
-<li>innerHTML 设置或获取当前节点元素的后代元素</li>
-<li>outerHTML 设置或获取当前节点元素及其后代元素 </li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2553,7 +2502,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2608,7 +2557,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">65.6k</span>
+    <span title="Site words total count">67.2k</span>
   
 </div>
 
